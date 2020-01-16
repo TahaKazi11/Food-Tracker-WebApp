@@ -10,7 +10,7 @@ North Building
 |Mingshen Zhu    |`zhumin16`            |            
 |Salwa Abdul Qayyum      |`abdulq10`|
 | Joshua Fernandes | `ferna857`|
-| Bo Liu | `liubo18`
+| Bo Liu | `liubo18`|
 | ShiZhen Cui | `cuishizh`|
 
 # Guidelines
