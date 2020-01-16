@@ -1,8 +1,8 @@
 Team Name: North Building
 
-Member			UTORid
-Rongda Yu		yurongdia
-
+Member:			| UTORid:
+- Rongda Yu		| yurongda
+- Mingshen Zhu		| zhumin16
 
 Guidelines
 - Methods of Communications:
