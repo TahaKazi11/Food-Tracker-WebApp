@@ -5,7 +5,7 @@ Member:			| UTORid:
 - Rongda Yu		| yurongda
 - Mingshen Zhu		| zhumin16
 - Salwa Abdul Qayyum	| abdulq10
-
+- ShiZhen Cui           | cuishizh
 
 Guidelines
 - Methods of Communications:
