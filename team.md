@@ -1,8 +1,8 @@
 Team Name: North Building
 
-Member:	UTORid
--Rongda Yu: yurongdia
--Salwa Abdul Qayyum: abdulq10
+Member   	         UTORid
+Rongda Yu               yurongdia
+Salwa Abdul Qayyum      abdulq10
 
 
 Guidelines
