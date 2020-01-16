@@ -6,6 +6,7 @@ Member:			| UTORid:
 - Mingshen Zhu		| zhumin16
 - Salwa Abdul Qayyum	| abdulq10
 - ShiZhen Cui           | cuishizh
+- Bo Liu                | liubo18
 
 Guidelines
 - Methods of Communications:
