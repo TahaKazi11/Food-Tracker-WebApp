@@ -1,8 +1,11 @@
 Team Name: North Building
 
+
 Member:			| UTORid:
 - Rongda Yu		| yurongda
 - Mingshen Zhu		| zhumin16
+- Salwa Abdul Qayyum	| abdulq10
+
 
 Guidelines
 - Methods of Communications:
