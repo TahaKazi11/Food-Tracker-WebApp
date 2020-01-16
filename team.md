@@ -1,14 +1,19 @@
-Team Name: North Building
+# Team Name: 
+North Building
 
 
-Member:			| UTORid:
-- Rongda Yu		| yurongda
-- Mingshen Zhu		| zhumin16
-- Salwa Abdul Qayyum	| abdulq10
-- ShiZhen Cui           | cuishizh
-- Bo Liu                | liubo18
+# Team Members
 
-Guidelines
+|  Name          |    UtorID                     |                 
+|----------------|-------------------------------|
+|Rongda Yu		 |`yurongda`            |            
+|Mingshen Zhu    |`zhumin16`            |            
+|Salwa Abdul Qayyum      |`abdulq10`|
+| Joshua Fernandes | `ferna857`|
+| Bo Liu | `liubo18`
+| ShiZhen Cui | `cuishizh`|
+
+# Guidelines
 - Methods of Communications:
 	utoronto email and discord.
 
