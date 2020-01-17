@@ -12,6 +12,7 @@ North Building
 | Joshua Fernandes | `ferna857`|
 | Bo Liu | `liubo18`|
 | ShiZhen Cui | `cuishizh`|
+| Taha Kazi | `kazitaha`|
 
 # Guidelines
 - Methods of Communications:
