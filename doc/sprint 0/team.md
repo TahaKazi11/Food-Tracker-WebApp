@@ -38,3 +38,13 @@ North Building
 
 - Contingency planning:
 	Evaluations on team members are being regularly conducted. A team member who does not cooperate will first be warned. Notice that team members' evaluation also contribute to the course mark. 
+
+# Commit Guidelines
+- You must **never** directly commit to the master branch.
+- Commits should be done in their own feature branch which are then merged via pull request. 
+-  When starting a new branch you must make sure the base branch is the up to date master branch.	
+- A pull request should have at least one reviewer before it is merged into master. 
+- Before beginning a pull request you must pull from master and make sure your branch compiles with the latest changes from master.
+-  Commits should have helpful messages describing what is being changed in the commit.
+	 Example good commit message:
+	 `Fix: stop API from returning empty array when requesting data from 'x' endpoint`
