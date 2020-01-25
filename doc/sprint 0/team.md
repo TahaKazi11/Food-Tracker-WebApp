@@ -1,4 +1,3 @@
-
 # Team Name: 
 North Building
 
@@ -16,6 +15,13 @@ North Building
 | Taha Kazi | `kazitaha`|
 
 # Guidelines
+#### General Guidelines:
+- Respect each other’s ideas.  
+- Respect the other group members.  
+- Try not to interrupt each other.
+- Everyone’s opinion should count.  
+- Be honest with each other.
+
 #### Methods of Communications:
 utoronto email and discord.
 
@@ -29,6 +35,9 @@ You should not miss more than **2** team meetings without giving a fair reason.
 
 #### Meeting preparation:
 Come prepared with a smart device and a meeting plan about what is going to be discussed in the meeting.
+
+#### Decision Making:
+If the group cannot decide on something we will take a vote. A simple majority is required for a vote to pass. 
 
 #### Roles and division of work:
 There will be a team coordinator who gather opinions and establish necessary documents for our agile team. Tasks will be claimed by team members once the project backlog is created.
@@ -45,6 +54,7 @@ If a team member leaves the course, their workload will be equally distributed t
 
 # Commit Guidelines
 - You must **never** directly commit to the master branch.
+- The `master` branch should **always** be in a 'working' state. If your merge breaks the master branch it is your responsibility to fix it immediately. This rule is important as it makes sure we always have a working product. 
 - Commits should be done in their own feature branch which are then merged via pull request. 
 - Content of log messages must follow industry standard (clear and concise). 
 - Commits should be done frequently into your own personal branch to make sure your code is backed up.
