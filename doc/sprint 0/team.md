@@ -15,26 +15,52 @@ North Building
 | Taha Kazi | `kazitaha`|
 
 # Guidelines
-- Methods of Communications:
-	utoronto email and discord.
+#### General Guidelines:
+- Respect each other’s ideas.  
+- Respect the other group members.  
+- Try not to interrupt each other.
+- Everyone’s opinion should count.  
+- Be honest with each other.
 
-- Communication response times:
-	within 12 hours.
+#### Methods of Communications:
+utoronto email and discord.
 
-- Standup/other agile meetings:
-	Meetings can happen online through discord or in person at school study rooms.
+#### Communication response times:
+within 12 hours.
 
-- Meeting prepartion:
-	the only preparation needed is a smart device and a plan in mind.
+#### Standup / other agile meetings:
+Meetings can happen online through discord or in person at school study rooms. Before a meeting starts, the group decides on someone to take minutes/meeting notes. That person will be responsible for taking and posting the notes from the meetings.
 
-- Version control:
-	Content of log messages must follow industry standard (clear and concise). Commit modifications periodically to keep everyone updated. Whenever starting to modify code in branches, first check the status of git branches and see if there are any updates made by other team members recently. Always pull the updates first before working on the project.
+You should not miss more than **2** team meetings without giving a fair reason.  
 
-- Roles and division of work:
-	There will be a team coordinator who gather opinions and establish necessary documents for our agile team. Tasks will be claimed by team members once the project backlog is created.
+#### Meeting preparation:
+Come prepared with a smart device and a meeting plan about what is going to be discussed in the meeting.
 
-- Submitting sprint deliverables and software:
-	Deliverables should be submitted before the deadline of each sprint. Make sure that all the requirements and features are fulfilled and merged. Team coordinator is responsible to confirm the completion of deliverables and submit accordingly. Other team members also have the responsibility to notify team coordinator about any discrepancies in deliverables.
+#### Decision Making:
+If the group cannot decide on something we will take a vote. A simple majority is required for a vote to pass. 
 
-- Contingency planning:
-	Evaluations on team members are being regularly conducted. A team member who does not cooperate will first be warned. Notice that team members' evaluation also contribute to the course mark. 
+#### Roles and division of work:
+There will be a team coordinator who gather opinions and establish necessary documents for our agile team. Tasks will be claimed by team members once the project backlog is created.
+
+#### Submitting sprint deliverables and software:
+
+Deliverables should be submitted before the deadline of each sprint. Make sure that all the requirements and features are fulfilled and merged. Team coordinator is responsible to confirm the completion of deliverables and submit accordingly. Other team members also have the responsibility to notify team coordinator about any discrepancies in deliverables.
+
+#### Contingency planning:
+Evaluations on team members are being regularly conducted. It is expected that each team member contributes roughly the same amount of work to the project. A team member who is not cooperating will be warned first. 
+
+If a team member leaves the course, their workload will be equally distributed to the other group members.
+
+
+# Commit Guidelines
+- You must **never** directly commit to the master branch.
+- The `master` branch should **always** be in a 'working' state. If your merge breaks the master branch it is your responsibility to fix it immediately. This rule is important as it makes sure we always have a working product. 
+- Commits should be done in their own feature branch which are then merged via pull request. 
+- Content of log messages must follow industry standard (clear and concise). 
+- Commits should be done frequently into your own personal branch to make sure your code is backed up.
+-  When starting a new branch you must make sure the base branch is the up to date master branch.	
+- A pull request should have at least one reviewer before it is merged into master. 
+- Before beginning a pull request you must pull from master and make sure your branch compiles with the latest changes from master.
+-  Commits should have helpful messages describing what is being changed in the commit.
+	 Example good commit message:
+	 `Fix: stop API from returning empty array when requesting data from 'x' endpoint`
