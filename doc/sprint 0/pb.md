@@ -6,19 +6,19 @@ Point Estimate: Fibonacci → 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 37
 ### As a user, I want to be able to view the nutritional information of the food I eat on campus so I can keep track of my calories/macronutrients
 | Priority | Point Estimate |
 |--|--|
-| 4| 5  |
+| 2| 5  |
   
 COS: Every food item must have its calories listed and also the macronutrient information when expanded
 ### As a user, I can know the location and hours of operation for all store.
 | Priority | Point Estimate |
 |--|--|
-| 4| 5  |
+| 2| 5  |
   
 COS: Every user should be able to see the stores that are open.
 ### As a user, I can save favorite foods or store.
 | Priority | Point Estimate |
 |--|--|
-| 4| 8  |
+| 2| 8  |
   
 COS: Every user should be able to save any item from any menu available through the application
 
@@ -32,21 +32,21 @@ Criteria for satisfaction: User is able to login with email and has an account p
 ### As a user, I would like to order food when I am still on my way to the food court or in the lecture, so I can save the time for waiting to study more course material.
 | Priority | Point Estimate |
 |--|--|
-| 8| 13  |
+| 4| 13  |
 
 Criteria for satisfaction: User is able to send the order to designated food supplier, and the supplier able to revive the order.
 
 ### As a user, I want to track my food when it’s ready for pick up, so I can plan my time.
 | Priority | Point Estimate |
 |--|--|
-| 8| 5  |
+| 4| 5  |
 
 Criteria for satisfaction: User can see a sign shows the order is ready for pick up. A supplier has a button to send out order is ready to pick up.
 
 ### As a user, I want to search the food I want, and the location and who has it can show up. So I don’t need to go through all the menu.
 | Priority | Point Estimate |
 |--|--|
-| 3| 5  |
+| 2| 5  |
 
 Criteria for satisfaction: User is able to search for food in the application, the application will display a list sort by relevance.
 
@@ -54,7 +54,7 @@ Criteria for satisfaction: User is able to search for food in the application, t
 
 | Priority | Point Estimate |
 |--|--|
-| 8| 13  |
+| 4| 13  |
 
 Criteria For Satisfaction:
 User needs to first add a payment method
@@ -64,7 +64,7 @@ User needs to first add a payment method
 
 | Priority | Point Estimate |
 |--|--|
-| 2| 13  |
+| 1| 13  |
 
 Criteria For Satisfaction: All the past daily digests are presented as two of the available options (graphs, pictures, and text)
 
@@ -72,7 +72,7 @@ Criteria For Satisfaction: All the past daily digests are presented as two of th
 
 | Priority | Point Estimate |
 |--|--|
-| 6| 55  |
+| 3| 55  |
 
 Criteria For Satisfaction: User needs to first have an active account. User should be able to follow other users and create groups.
 
@@ -80,7 +80,7 @@ Criteria For Satisfaction: User needs to first have an active account. User shou
 
 | Priority | Point Estimate |
 |--|--|
-| 8| 34  |
+| 4| 34  |
 
 Criteria For Satisfaction: User needs to first have an active account. User should be able to post to a story feed so that they can be seen by followers.
 
@@ -88,7 +88,7 @@ Criteria For Satisfaction: User needs to first have an active account. User shou
 
 | Priority | Point Estimate |
 |--|--|
-| 8| 55  |
+| 4| 55  |
 
 Criteria For Satisfaction: User needs to first have an active account
 
@@ -96,14 +96,14 @@ Criteria For Satisfaction: User needs to first have an active account
 
 | Priority | Point Estimate |
 |--|--|
-| 2| 5  |
+| 1| 5  |
   
 COS: All food items shown have prices listed
 
 ### As a student, I want to be warned if I am going over my daily budget so that I can be mindful of my spending and avoid over-spending on food
 | Priority | Point Estimate |
 |--|--|
-| 2| 5  |
+| 1| 5  |
 
 COS: Must inform user if daily sum of prices exceed their set daily budget
 
@@ -111,13 +111,13 @@ COS: Must inform user if daily sum of prices exceed their set daily budget
 
 | Priority | Point Estimate |
 |--|--|
-| 3| 5  |
+| 2| 5  |
 
 ### As a student in~ a rush, I want to see the food options available in specific buildings close to my classes so I can get the food I prefer and still make it to class on time
 
 | Priority | Point Estimate |
 |--|--|
-| 3| 5  |
+| 2| 5  |
 
   
 COS: Must have the option to view food options in a specific building/buildings
@@ -126,7 +126,7 @@ COS: Must have the option to view food options in a specific building/buildings
 
 | Priority | Point Estimate |
 |--|--|
-| 3| 5  |
+| 2| 5  |
 
 COS: Only a food merchant must have the option to list a food item as unavailable
 
@@ -143,7 +143,7 @@ Criteria for satisfaction: The frontend should be able to be worked on and compi
 
 | Priority | Point Estimate |
 |--|--|
-| 4| 5  |
+| 2| 5  |
 
 Criteria for satisfaction:
 - The frontend compiler should have webkit and webtool enabled so that developers can easily develop on the UI.
@@ -185,7 +185,7 @@ There should be a server on the internet which we can deploy the server code to 
 
 | Priority | Point Estimate |
 |--|--|
-| 7| 13  |
+| 4| 13  |
 
 Criteria for satisfaction:
 
@@ -195,7 +195,7 @@ All features of the application should be usable from a mobile phone.
 
 | Priority | Point Estimate |
 |--|--|
-| 3| 21  |
+| 2| 21  |
 
 Criteria for satisfaction:
 
