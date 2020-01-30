@@ -1,35 +1,23 @@
-﻿The team use discord as main way of communication. There are several channels named as general discussion, project, announcement, polls-and-questions and tools so we can discuss different topics in different channels.
+﻿# Process
 
+**North-Building** uses Discord as a main way of communication. There are several text channels named as *General Discussion*, *Project*, *Announcements*, *Polls-and-Questions* and *Tools* to divide up topics of group discussion.
 
-  
+***Polls-and-Questions*** text channel contributes to our **decision making**. Decisions are based on choices from the majority of members. If there is a tie, further dicussion is involved or swapping a team member's choice would be a shortcut.
 
+***Priority of user stories*** are often based on judgements of the team member who wrote that story. Objections will be raised if other team members do not agree. In that case, a further dicussion takes place to settle debate about priority of user stories.
 
-We had a meeting in campus, but most of the meeting are hold online because they are more flexible. We can also insert votes into the discussion online to improve the efficiency.
+***Meetings*** happen both in-person in tutorials and online through Discord. We had a meeting in campus, but most of the meetings are held online because they are more flexible. We can also insert votes into the discussion channel in Discord to allow more efficiency.
 
+## Collaboration
 
-  
+*Google Docs* documents serve as drafts in which can be edited by all team members. We use these documents as storage of ideas. Ideas such as _the projects we are planning to deliver_ are put into Google Docs at the early stage.
 
+User stories were written in Google Docs as a draft. Team lead was responsible for updating `Product Backlog`, another team member was responsible for putting user stories on JIRA.
 
-We also made a google doc as a draft which can be edited by all team members. We use this document as a storage of ideas like what project we are planning to do. 
+***Deliverables*** are picked by each team member and are done individually. Individual branch is created for each deliverable. Final work will be first pushed onto individual branches. Members are asked to review merge requests for final merge.
 
+## Next Phase
 
-The user stories were written in this google doc as a draft. We also discussed about the ideas and put it into jira.
+We need to learn how to build the basic Web-apps. After that, we will focus on improving and subdividing user stories to benefit the project as a whole.
 
-
-  
-
-
-When there are many options, we will discuss about it and sometimes we vote to make the conclusion fair.
-
-
-  
-
-
-For the deliverables part, each of us picked a part to do individually. The final works would be push into different branches in github. Everything will be merged at end.
-
-
-
-
-
-
-For the next step, we need to learn how to build the basic webapp. After that, we will focus on the user stories to improve the application.
+We will set more rules for discussion and organize polls and announcements effectively for better collaboration experience.
