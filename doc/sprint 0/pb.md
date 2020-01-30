@@ -32,18 +32,21 @@ Criteria for satisfaction: User is able to login with email and has an account p
 | Priority | Point Estimate |
 |--|--|
 | 8| 13  |
+
 Criteria for satisfaction: User is able to send the order to designated food supplier, and the supplier able to revive the order.
 
 ### As a user, I want to track my food when it’s ready for pick up, so I can plan my time.
 | Priority | Point Estimate |
 |--|--|
 | 8| 5  |
+
 Criteria for satisfaction: User can see a sign shows the order is ready for pick up. A supplier has a button to send out order is ready to pick up.
 
 ### As a user, I want to search the food I want, and the location and who has it can show up. So I don’t need to go through all the menu.
 | Priority | Point Estimate |
 |--|--|
 | 3| 5  |
+
 Criteria for satisfaction: User is able to search for food in the application, the application will display a list sort by relevance.
 
 ### As a user, I would like to launch an invitation to order food with my friends as a group so that we can share bills together.
