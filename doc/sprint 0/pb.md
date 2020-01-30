@@ -1,7 +1,9 @@
 # Product Backlog
 
-Priority: 1 - 10, with 1 being the highest priority
-Point Estimate: Fibonacci → 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377...
+Priority: 
+1 - 10, with 1 being the highest priority
+Point Estimate: 
+Fibonacci → 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377...
 
 ### As a user, I want to be able to view the nutritional information of the food I eat on campus so I can keep track of my calories/macronutrients
 | Priority | Point Estimate |
@@ -130,7 +132,7 @@ COS: Must have the option to view food options in a specific building/buildings
 
 COS: Only a food merchant must have the option to list a food item as unavailable
 
-As a frontend developer, I would like to have the application boilerplate so that I can work on the frontend.
+### As a frontend developer, I would like to have the application boilerplate so that I can work on the frontend.
 
 | Priority | Point Estimate |
 |--|--|
