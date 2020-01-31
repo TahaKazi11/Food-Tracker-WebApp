@@ -14,7 +14,7 @@
 
 User stories were written in Google Docs as a draft. Team lead was responsible for updating `Product Backlog`, another team member was responsible for putting user stories on JIRA. 
 
-***Jobs/ deliverables*** are picked by each team member and are done individually, available jobs are listed in discord so everybody would pick one from the remaining jobs. Individual branch is created for each deliverable/ job. If one of the members meet a problem on the job, he/she would ask for help by discord so teammate can afford some helps. Final work will be first pushed onto individual branches. Members are asked to review merge requests for final merge.
+***Jobs/ deliverables*** are picked by each team member and are done individually, available jobs are listed in discord so everybody would pick one from the remaining jobs. Individual branch is created for each deliverable/ job. If one of the members meet a problem on the job, he/she would ask for help by discord so teammate can afford some helps. Final work will be first pushed onto individual branches. Members are asked to review merge requests for final merge. The job division for next step is also been decided, there would be 3 frontend,3 backend and 1 floater full stack developers in our team.
 
 ***Discussions*** are hold on discord in most of case. Team member can post and reply anytime and it doesn't require everybody online at same time.
 
