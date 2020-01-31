@@ -1,3 +1,11 @@
-http://www.dineoncampus.ca/utm this webpage have all the information of the store with food service in campus.
-This webpage will provide some menu, but not all. Our product will provide the meun as much as we can, and user can search the food to get the store information that have the food user seaching. Also, user can login with their school email to store their favorite food and see the history of daily digests. Moreover, user can set their daily budget, so user can get a warning when over-spending on food. 
-The product is better for UTM student who want to find the food they want in campus without walk around the campus to find that. The website is aim to give out the basic information of store, and the event they hold.
+# compitition
+http://www.dineoncampus.ca/utm is the offical webpage for dineoncampus.ca for UTM, it included the event they hold and the location and hour of operation for every food store in campus, and promotions, as well as their contact information. For some store, they provided the menu, but most of it only have nutritional information.
+
+#Our product
+Our product is aim to help user to found food they want in campus. It will provide the menu with price of most of the store in campus, 
+
+#Taget User
+UTM student want to get food in campus, and get the food they want quickly
+
+#Why competitos don't focus on target user
+The competitors is the office page for the campany, they aim to give out the basic information. If they focus on our target user, they need to build up the database, seller interface, and user interface, such that seller can update the menu and in store quality, and store user information in database. As well as, the good use experient for user.
