@@ -1,7 +1,7 @@
 # Product Backlog
 
 ##### Priority: 
-1 - 10, with 1 being the highest priority
+1 - 5, with 1 being the highest priority
 ##### Point Estimate: 
 Fibonacci → 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377...
 
