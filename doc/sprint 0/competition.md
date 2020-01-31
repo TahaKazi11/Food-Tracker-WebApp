@@ -1,14 +1,37 @@
-# Compition.md
-## http://www.dineoncampus.ca/utm
-This is the offical webpage for dineoncampus.ca for UTM, it included the event they hold and the location and hour of operation for every food store in campus, and promotions, as well as their contact information. For some store, they provided the menu, but most of it only have nutritional information.
+# Competition
 
-# Our product
-Our product is aim to help user to found food they want in campus.
-User can find the menu with price and nutrirional information of most of the store in campus, and they can search food to find the store information that contain that food. If user login with school email, they can save the foods and store, see the history of daily digests, setup the daliy budget to get the over-budget alarm, and setup the food allergy.
-Food supplier can post their menu and receiv order from user to perpare for pickup, and update food quality in store.
+## About Competitor dineoncampus.ca/utm
 
-# Taget User
-UTM student want to get food in campus, and don't want to wasting time for line up in store. 
+This is the offical webpage for dineoncampus.ca for UTM. The webpage includes information about every food store on campus such as their dishes menu, location and hours of operation, promotions and their contact information. The webpage solely serves the purpose of providing information about dining on campus.
 
-# Why competitos don't focus on target user
-The competitors is the office page for the campany, they aim to give out the basic information. If they focus on our target user, they need to build up the database, seller interface, and user interface, such that seller can update the menu and in store quality, and store user information in database. As well as, the good use experient for user.
+## Our Project is BETTER
+
+**UTM Food Tracker** aims helping students to search and order food *online* and *on-demand* with a *better experience*.
+
+### Easily Accesible Information
+
+Each user has access to their personal data regarding budget, order history, daily digest history and favorite restaurant or food.
+
+- *Budget Alert*: We target students who care about their wallets and build functions in this project to help them keeping track of food expense.
+
+- A lot of students also care about their health and calories intake. Daily digest and data graphs are all they need to gain some health awareness.
+
+### User Experience
+
+keeps our project competitive with **fast-search** and **neatly-organized** restaurants information and food prices.
+
+Imagine a scenario when a first-year undergraduate who does not familiar with campus restaurants wants to find some place to order food but don't know where. In this case, our project's built-in filter *Nearby Restaurants* would offer such a help. It will immediately shows relevant information about nearby restaurants on whatever smart device one has. Or better yet, this student can tap *order* and pick-up from the selected restaurant. Student can also keeps track of their order status and get notified when it is ready.
+
+### Social Networking
+
+Users who wants to connect with other people in the same community or share posts about their favorite foods now has a chance! Our project adopts social media profiles as a feature. Users can follow friends. They can toggle their accounts as public or private and much more.
+
+**Crowd ordering** saves users money. Users are allowed to initiate an invite and form groups to share bills. This is better for people who wants to enjoy meal with their friends and not worrying about paying too much by themselves.
+
+## Target Users
+
+Although we keeps referring to "users" and "people" in this document. Really the target users are UTM students with different needs mentioned above.
+
+## Why Competitors Lose Focus on Target Users
+
+They aim to provide basic information about campus's dining structure. First, restaurant information are all over the place and lack organization. Second, they do not provide convenience to users of ordering food on-demand. This is a big disadvantage because students value their time. Third, it does not offer personalized experience like our project does. It does not have functionality such as *Budget Alert*, *Favorites*, and *Daily Digest*.
