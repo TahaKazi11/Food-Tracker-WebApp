@@ -1,0 +1,3 @@
+http://www.dineoncampus.ca/utm this webpage have all the information of the store with food service in campus.
+This webpage will provide some menu, but not all. Our product will provide the meun as much as we can, and user can search the food to get the store information that have the food user seaching. Also, user can login with their school email to store their favorite food and see the history of daily digests. Moreover, user can set their daily budget, so user can get a warning when over-spending on food. 
+The product is better for UTM student who want to find the food they want in campus without walk around the campus to find that. The website is aim to give out the basic information of store, and the event they hold.
