@@ -3,5 +3,8 @@
 3. Unit tests passed
 4. Functional tests passed
 5. Criteria of Satisfaction met
+6. Code is clean and maintainable
+7. All subtasks are closed/compelted
+
 
 _Ask yourself if the feature is ready to be shipped?_
