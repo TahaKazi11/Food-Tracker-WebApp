@@ -2,11 +2,21 @@
 
 ## Primary Objectives
 
-The objective of this project is to help student search and order food online and on-demand with a better user experience. Moreover, to allow users to easily access their personal information such as, their budget (through Budget Alerts), order history, daily digest history or their favorite restaraunt and food. Another, primary objective of this app is to provide a top-notch user experience through fast-searches and neatly-organized restaraunt information and food prices. Finally, the last objective is to provide social networking on the app, where users can share posts about their favourite foods and can follow friends, as well as save money through "crowd ordering".
+### Better Food Ordering Experience
+
+**UTM Food Tracker** aims to provide students with the best food ordering experience by exposing necessary food and restaurant information in a clean User Interface. It allows students to accurately locate restaurants nearby; search and order food on-demand without wasting too much time.
+
+### Personalized Data and Services
+
+*Order History*, *Daily Digest*, *Budget Alignment* are unique to each user. UTM Food Tracker aims to provide users with personalized data and customized settings. These functionalities help students financially, as well as contributing to their healthy lifestyle.
+
+### A Growing Food Community
+
+Social Media is another big feature that serves the purpose of connecting users who love their food. The goal of the platform does not limit to food ordering itself, but also building relationship between users through "food".
 
 ## Key users
 
-The key users that we have identified for our project are students, professors or visitors to the UTM campus. More specifically, students, professors or visitors who are new to the campus, or health conscious about what they eat, or have specific budgets that they want to maintain for food, or want to know the length of lines and what has been sold out for specific restaraunts.
+The key users that we have identified for our project are students, professors or visitors of the UTM campus. More specifically, students, professors or visitors who are new to the campus, or are health conscious about what they eat, or have specific budgets that they want to maintain for food, or want to know the length of lines and what has been sold out for specific restaraunts.
   
 ## Scenarios
 
@@ -18,6 +28,10 @@ The key users that we have identified for our project are students, professors o
 
 ## Principles
 
-The key principle is to provide information as accurate as possible, even if it means that the user might have to wait a few minutes for food related updates, such as but not limited to sudden promotions/sudden closures. 
+### Reliable Information
 
-Another key principle, is to provide the user the best user experience possible, not over-cluttering the screen, keeping things clean and simple.
+Providing accurate information about food service and availability considered as one of the key principles. For example, user experience will suffer if a user finds out the food is gone right after he places an order and his credit card is being charged.
+
+### Smooth UI
+
+Keeping User Interface running as smoothly as possible is another key principle. Text and images over-cluttering the screen will degrade user experience as a whole.
