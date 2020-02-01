@@ -1,6 +1,8 @@
 # Summary
 
-## Primary Objectives
+##Primary objectives
+
+Currently, students at the University of Toronto Mississauga campus feel like finding food options on campus that suit their budget and health needs is a hassle. The objective of this project is to build an app which aims to solve this problem by having the following objectives:
 
 ### Better Food Ordering Experience
 
