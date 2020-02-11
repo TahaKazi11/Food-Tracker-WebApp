@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Server
+
+Server is based on Ubuntu 18.04 LTS, host on Azure.
+To access our server, you can use 'ssh northbuilding@52.186.68.121'.
+The password is post on Discord announcements channel.
