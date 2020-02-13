@@ -1,6 +1,6 @@
 **Participants**: Rongda Yu, Mingshen Zhu, Salwa Abdul Qayyum, Joshua Fernandes, Bo Liu, ShiZhen Cui, Taha Kazi
 
-**Release Date**: April 2nd
+**Release Date**: April 2nd, 2020
 
 **Major features we intend to release:**
 1. Users should be able to view information about the different food vendors located on campus, the nutritional information of the food they consume on campus while adhering to a budget.
