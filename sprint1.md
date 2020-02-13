@@ -1,8 +1,8 @@
-**Team Capacity**: 7
-
 **Participants**: Rongda Yu, Mingshen Zhu, Salwa Abdul Qayyum, Joshua Fernandes, Bo Liu, ShiZhen Cui, Taha Kazi
 
 We started by first distributing a user story to every person, went over how each user story will be broken down into tasks. We decided to let the asignees decide how they wanted to break down the user story in the tasks. Every participant has participated by seeking out a user story they would be comfortable working on and if they weren't comfortable, we actively came with resources to direct each other to the necessary source of information needed to complete a specific user story. We had a good idea on how to estimate every user story and did not stumble upon any spikes.
+
+**Team Capacity**: For this sprint we have decided that each person will give around 5-6 hours. This includes the hours for the times we meet as a group to work on a task and even what everyone does individually.
 
 **Sprint goal**: To have a general application ready so we can have a foundation ready to build all the needed features we will be working on in Sprint 2.
 
