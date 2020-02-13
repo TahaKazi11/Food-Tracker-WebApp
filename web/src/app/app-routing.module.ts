@@ -7,7 +7,7 @@ import { DailyDigestComponent } from './daily-digest/daily-digest.component';
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'daily digest', component: DailyDigestComponent}
+  { path: 'DailyDigest', component: DailyDigestComponent}
 ];
 
 @NgModule({
