@@ -1,1 +1,41 @@
-<p>login works!</p>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+  integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<div class="container mt-5 p-5 shadow-lg">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 d-none d-md-block">
+      <div class="card-columns">
+        <div *ngFor="let image of images" class="card shadow">
+          <img src="../../assets/img/{{ image }}" alt="" class="card-img-top">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6 ">
+      <h2 class="mb-5">Welcome back :)</h2>
+      <form>
+        <div class="form-group">
+          <label for="emailAddress"><i class="fa fa-fw fa-envelope"></i> Email address</label>
+          <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="passwordInput"><i class="fa fa-fw fa-key"></i> Password</label>
+          <input type="password" class="form-control" id="passwordInput">
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Remember me</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
