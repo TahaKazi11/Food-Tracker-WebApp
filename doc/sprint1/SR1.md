@@ -6,10 +6,13 @@ Rongda Yu, Mingshen Zhu, Salwa Abdul Qayyum, Joshua Fernandes, Bo Liu, ShiZhen C
 - Good initiative setting up meetings.
 - Good communication within members of the team about meeting dates.
 - Good work ethic on finishing tasks/components on time. 
+- Good coding practices (well-documented and concise code).
 
 #### what are some new practices that you might want to use during next sprint
 - Make sure we are communicating what we are working on to the relevant people who are working on other parts of the system.
-- 
+- Having collaborative and responsible manners.
+- Pay attention to detail.
+- Every team member should have a clear structure in mind of what are the components within the project. 
 
 #### what are (if any) harmful practices you should stop using during next sprint
 N/A
