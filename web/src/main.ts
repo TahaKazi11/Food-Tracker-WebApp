@@ -10,3 +10,24 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
+
+export interface RestaurantList {
+  'restaurantlist': string[];
+}
+
+export interface RestaurantMenu {
+  'menu': MenuItem[];
+}
+
+export interface MenuItem {
+  'name': string;
+  'calories': number;
+  'price': number;
+}
+
+export interface Restaurant {
+  'name': string;
+  'menu': RestaurantMenu;
+  'location': string;
+  'hours': string;
+}
