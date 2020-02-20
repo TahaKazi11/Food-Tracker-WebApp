@@ -15,10 +15,31 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadRestraunts();
+    this.loadRestrauntsNoLogin();
   }
 
-  private loadRestraunts() {
+  private loadRestrauntsNoLogin() {
+    const restraunts = this.loadRestaurantList();
+    restraunts.forEach((restraunt) => {
+      ApiService.requestingRestraunt(restraunt)
+      .then((data) => {
+        this.restrauntList.push(data);
+      });
+    });
+  }
+
+  private loadRestrauntsWithAccount(accountId: string) {
+    ApiService.requestingRestraunts(accountId)
+    .then((data) => {
+      if (!data) {
+        // TODO display refeshbutton error
+      } else {
+        this.restrauntList = data;
+      }
+    });
+  }
+
+  private loadRestaurantList(): string[] {
     let restraunts: string[];
     ApiService.requestingRestrauntList()
     .then((data) => {
@@ -27,15 +48,10 @@ export class HomeComponent implements OnInit {
       } else {
         restraunts = data.restaurantlist;
       }
+    }).catch((error) => {
+        return [];
     });
-    restraunts.forEach((restraunt) => {
-      ApiService.requestingRestraunt(restraunt)
-      .then((data) => {
-        this.restrauntList.push(data);
-      });
-    });
-
-
+    return restraunts;
   }
 
 }

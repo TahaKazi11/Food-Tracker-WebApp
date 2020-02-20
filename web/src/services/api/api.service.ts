@@ -28,6 +28,8 @@ const urls = {
         ) => `${ apiBase() }/restaurants`,
       full: (restaurantId: string
         ) => `${ apiBase() }/full-info/by-restaurant-id/${ restaurantId }`,
+      byAccount: (userAccountId: string
+        ) => `${ apiBase() }/restaurants/by-account-id/${ userAccountId }`,
     },
 
 
@@ -37,6 +39,9 @@ export class ApiService {
 
     private static axiosService            = AxiosService.getInstance();
 
+    public static requestingRestraunts(userAccountId: string): Promise<Restaurant[]> {
+      return this.requestingFromApiWithRetries<Restaurant[]>(urls.restaurants.byAccount(userAccountId), 1); // TODO add try catch for handling a not found restraunt not found
+    }
 
     public static requestingRestraunt(restrauntId: string): Promise<Restaurant> {
       return this.requestingFromApiWithRetries<Restaurant>(urls.restaurants.menu(restrauntId), 1); // TODO add try catch for handling a not found restraunt not found
