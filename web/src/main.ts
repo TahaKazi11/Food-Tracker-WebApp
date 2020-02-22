@@ -30,4 +30,5 @@ export interface Restaurant {
   'menu': RestaurantMenu;
   'location': string;
   'hours': string;
+  'image': string;
 }

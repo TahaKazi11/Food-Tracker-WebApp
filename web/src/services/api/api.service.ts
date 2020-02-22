@@ -39,19 +39,19 @@ export class ApiService {
 
     private static axiosService            = AxiosService.getInstance();
 
-    public static requestingRestraunts(userAccountId: string): Promise<Restaurant[]> {
+    public static requestingRestaurants(userAccountId: string): Promise<Restaurant[]> {
       return this.requestingFromApiWithRetries<Restaurant[]>(urls.restaurants.byAccount(userAccountId), 1); // TODO add try catch for handling a not found restraunt not found
     }
 
-    public static requestingRestraunt(restrauntId: string): Promise<Restaurant> {
+    public static requestingRestaurant(restrauntId: string): Promise<Restaurant> {
       return this.requestingFromApiWithRetries<Restaurant>(urls.restaurants.menu(restrauntId), 1); // TODO add try catch for handling a not found restraunt not found
     }
 
-    public static requestingMenuFromRestraunt(restrauntId: string): Promise<RestaurantMenu> {
+    public static requestingMenuFromRestaurant(restrauntId: string): Promise<RestaurantMenu> {
       return this.requestingFromApiWithRetries<RestaurantMenu>(urls.restaurants.menu(restrauntId), 1); // TODO add try catch for handlign menu not found
     }
 
-    public static requestingRestrauntList(): Promise<RestaurantList> {
+    public static requestingRestaurantList(): Promise<RestaurantList> {
       return this.requestingFromApiWithRetries<RestaurantList>(urls.restaurants.list(), 2); // TODO add try catch for bad gateway
     }
 
