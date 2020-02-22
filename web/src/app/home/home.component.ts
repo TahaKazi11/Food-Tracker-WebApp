@@ -16,8 +16,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loadRestaurantsNoLogin();
-    this.fillRestaurantList();
-    console.log(this.restrauntList);
+    this.fillRestaurantList(); // TODO: Remove this function when we have data from the backend 
   }
 
   private loadRestaurantsNoLogin() {
@@ -73,7 +72,7 @@ export class HomeComponent implements OnInit {
       location: 'IB 220',
       image: 'https://media.discordapp.net/attachments/666763770327990345/679081001019768849/Final_Logo.png?width=571&height=571',
       menu: this.mockMenu(),
-      name: 'JoshMockRest'
+      name: 'Mock Restaurant'
     } as Restaurant;
     return temp;
   }
