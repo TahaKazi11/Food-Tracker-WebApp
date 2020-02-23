@@ -65,7 +65,6 @@ public class GetMenu_and_price implements HttpHandler {
         }
         Spliter = new  Txt_information_spliter(first,menu_link);
         response = Spliter.Search_Restaurant();
-        
         OutputStream os = r.getResponseBody();
         os.write(response.toString().getBytes());
         os.close();

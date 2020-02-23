@@ -6,7 +6,7 @@ public class test_only_main {
 	private static Txt_information_spliter Spliter;
     public static void main(String args[]) 
     { 
-        String first = "Shawama_The_Meeting_Place";
+        String first = "Harvey's";
 		Spliter = new  Txt_information_spliter(first ,menu_link);
         JSONObject response = Spliter.Search_Restaurant();
     	System.out.println(response);

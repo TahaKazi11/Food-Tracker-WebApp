@@ -31,10 +31,11 @@ Chicken:
 Grilled_Chicken=6.59,Buffalo_Chicken=6.49,Crispy_Chicken=6.49;
 Wraps:
 Crisp=6.59,Grilled=6.69,Buffalo=6.59;
-Strips:4_Piece=5.99,Grilled_Chicken_Salad=8.49;
+Strips:
+4_Piece=5.99,Grilled_Chicken_Salad=8.49;
 Other Options:
 Fish_Sandwich=5.19,Vaggie_Burger=5.19,Grilled_Hot_Dog=3.79;
 Snacks:
-Jr.Burger=1.99,Double_Jr.Burger=2.99,Deep_Fried_Pickles=3.79,Fries=2.99,Onion_Rings=2.99,Frings=3.79,Side_Garden_Salad=2.99,Donuts(4)=1.99,Donuts(8)=3,49,Apple_Pie(2)=1.99,Feature_Pie=1.99,Jr.Crispy=2.49,Jr.Buffalo=2.49;
+Jr.Burger=1.99,Double_Jr.Burger=2.99,Deep_Fried_Pickles=3.79,Fries=2.99,Onion_Rings=2.99,Frings=3.79,Side_Garden_Salad=2.99,Donuts(4)=1.99,Donuts(8)=3.49,Apple_Pie(2)=1.99,Feature_Pie=1.99,Jr.Crispy=2.49,Jr.Buffalo=2.49;
 Hand_Spun_Shakes:
 Classic=3.09;

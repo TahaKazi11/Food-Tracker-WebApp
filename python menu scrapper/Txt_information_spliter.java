@@ -90,7 +90,7 @@ public class Txt_information_spliter {
 				if (!line.contains("ame:") && line.contains(":")){
 					//tag detected
 					if (tag != null) {
-						System.out.println("tag detected");
+//						System.out.println("tag detected, finished scan tag"+tag);
 						whole.append("Menu",tag);
 					}
 					tag = get_tag(line);
@@ -108,7 +108,7 @@ public class Txt_information_spliter {
 					}
 				}
 			}
-
+	    	whole.append("Menu",tag);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -117,7 +117,8 @@ public class Txt_information_spliter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+
+		return whole;
     	
     }
     
