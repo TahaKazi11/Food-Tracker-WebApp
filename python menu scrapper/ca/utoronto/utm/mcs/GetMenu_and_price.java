@@ -1,3 +1,4 @@
+package ca.utoronto.utm.mcs;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -65,6 +66,12 @@ public class GetMenu_and_price implements HttpHandler {
         }
         Spliter = new  Txt_information_spliter(first,menu_link);
         response = Spliter.Search_Restaurant();
+        if (response == null) {
+        	r.sendResponseHeaders(400,-1);
+        }
+        else {
+            r.sendResponseHeaders(200,response.toString().getBytes().length);   
+        }
         OutputStream os = r.getResponseBody();
         os.write(response.toString().getBytes());
         os.close();
