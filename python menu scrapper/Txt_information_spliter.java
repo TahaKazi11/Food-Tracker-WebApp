@@ -28,14 +28,15 @@ public class Txt_information_spliter {
     
     }
    
-    public String Search_Restaurant() {
-        
+    public JSONObject Search_Restaurant() {
+    	JSONObject result = null;
         
         try {
 			BufferedReader in = new BufferedReader(new FileReader(File));
 			while((line = in.readLine()) != null){
 				if (line.contains("ame:"+Restaurant)){
-					System.out.println(detect_line_type(in));
+//					System.out.println(detect_line_type(in));
+					result = detect_line_type(in);
 				}
 		    }
 			
@@ -48,14 +49,14 @@ public class Txt_information_spliter {
 			e.printStackTrace();
 		}
 
-    	return null;
+    	return result;
     }
     public JSONObject get_tag(String line) {
     	if (line.contains(":")) {
     		String[] v = line.split(":");
     		JSONObject Tag_body = new JSONObject();
     		try {
-				Tag_body.put("tag",v[0]);
+				Tag_body.put("tag",v[0].replaceAll("_", " "));
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -81,7 +82,7 @@ public class Txt_information_spliter {
     	try {
 			while((line = in.readLine()) != null){
 				if (line.contains("ame:")){
-					whole.append("tag",tag);
+					whole.append("Menu",tag);
 //					System.out.println("tag ended");
 //					System.out.println(line+" end met"); 
 					return whole;
@@ -90,7 +91,7 @@ public class Txt_information_spliter {
 					//tag detected
 					if (tag != null) {
 						System.out.println("tag detected");
-						whole.append("tag",tag);
+						whole.append("Menu",tag);
 					}
 					tag = get_tag(line);
 				}
@@ -99,8 +100,8 @@ public class Txt_information_spliter {
 					String[] dishes = get_dishes(line);
 					for (String a : dishes) {
 
-			            dish.put("Name", a.split("=")[0]);
-			            dish.put("Price", a.split("=")[1]);
+			            dish.put("Name", a.split("=")[0].replaceAll("_", " "));
+			            dish.put("Price", a.split("=")[1].replaceAll("_", " "));
 //			            System.out.println(dish); 
 //			            System.out.println(tag); 
 			            tag.append("dishes", dish);

@@ -4,27 +4,27 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.LinkedHashMap;
+
 import java.util.stream.Collectors;
 
 import org.json.*;
 
-import com.sun.javafx.scene.control.skin.Utils;
+
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 
 public class GetMenu_and_price implements HttpHandler {
-    private String Restaurant;
 
-
+	private String menu_link = "python menu scrapper/Menu_By_Hand.txt";
+	private Txt_information_spliter Spliter;
     public GetMenu_and_price() {
     }
    
     public void handle(HttpExchange r) {
         try {
             if (r.getRequestMethod().equals("GET")) {
-                handlePut(r);
+                handleGet(r);
             }
             else{ r.sendResponseHeaders(400,-1);}
         } catch (Exception e) {
@@ -40,13 +40,12 @@ public class GetMenu_and_price implements HttpHandler {
 	}}
 
 
-    public void handlePut(HttpExchange r) throws IOException, JSONException{
+    public void handleGet(HttpExchange r) throws IOException, JSONException{
         /* TODO: Implement this.
            Hint: This is very very similar to the get just make sure to save
                  your result in memory instead of returning a value.*/
 
-        JSONObject response = new JSONObject(new LinkedHashMap());
-        JSONArray movies = new JSONArray();
+        JSONObject response = new JSONObject();
         Boolean firstsetted = false;
         String first = "";
         try{
@@ -64,7 +63,9 @@ public class GetMenu_and_price implements HttpHandler {
             r.sendResponseHeaders(400,-1);
             e.printStackTrace();
         }
-
+        Spliter = new  Txt_information_spliter(first,menu_link);
+        response = Spliter.Search_Restaurant();
+        
         OutputStream os = r.getResponseBody();
         os.write(response.toString().getBytes());
         os.close();

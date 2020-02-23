@@ -1,8 +1,14 @@
-    
+import org.json.*;
+
+
 public class test_only_main { 
+	private static String menu_link = "python menu scrapper/Menu_By_Hand.txt";
+	private static Txt_information_spliter Spliter;
     public static void main(String args[]) 
     { 
-    	Txt_information_spliter t = new Txt_information_spliter("Tim_Holtons","python menu scrapper/Menu_By_Hand.txt");
-    	t.Search_Restaurant();
+        String first = "Shawama_The_Meeting_Place";
+		Spliter = new  Txt_information_spliter(first ,menu_link);
+        JSONObject response = Spliter.Search_Restaurant();
+    	System.out.println(response);
     } 
 } 
