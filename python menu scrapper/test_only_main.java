@@ -9,6 +9,11 @@ public class test_only_main {
         String first = "Harvey's";
 		Spliter = new  Txt_information_spliter(first ,menu_link);
         JSONObject response = Spliter.Search_Restaurant();
-    	System.out.println(response);
+    	try {
+			System.out.println(response.toString(4));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     } 
 } 

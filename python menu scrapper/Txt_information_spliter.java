@@ -1,24 +1,18 @@
 
 import java.io.IOException;
-import java.io.OutputStream;
+
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.*;
 
 import org.json.*;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 
 
 public class Txt_information_spliter {
     private String Restaurant;
     private String File;
-    private JSONObject response = new JSONObject(new LinkedHashMap());
-    private JSONArray Type = new JSONArray();
+
     private String line;
     
     public Txt_information_spliter(String Restaurant_name,String File_name) {
@@ -96,10 +90,10 @@ public class Txt_information_spliter {
 					tag = get_tag(line);
 				}
 				else if(line.contains(";")){
-					JSONObject dish = new JSONObject();
+					
 					String[] dishes = get_dishes(line);
 					for (String a : dishes) {
-
+						JSONObject dish = new JSONObject();
 			            dish.put("Name", a.split("=")[0].replaceAll("_", " "));
 			            dish.put("Price", a.split("=")[1].replaceAll("_", " "));
 //			            System.out.println(dish); 
