@@ -19,6 +19,7 @@ public class Txt_information_spliter {
     private String File;
     private JSONObject response = new JSONObject(new LinkedHashMap());
     private JSONArray Type = new JSONArray();
+    private String line;
     
     public Txt_information_spliter(String Restaurant_name,String File_name) {
    
@@ -28,26 +29,14 @@ public class Txt_information_spliter {
     }
    
     public String Search_Restaurant() {
-        String line;
+        
         
         try {
 			BufferedReader in = new BufferedReader(new FileReader(File));
-//			System.out.println("File Found");
-//			System.out.println("ame:"+Restaurant);
 			while((line = in.readLine()) != null){
-//				System.out.println(line);
 				if (line.contains("ame:"+Restaurant)){
-					line = in.readLine();
-					get_tag(line);
-					System.out.println("tag: "+get_tag(line));
-					line = in.readLine();
-					String[] dishes = get_dishes(line);
-					for (String a : dishes) {
-			            System.out.println(a); 
-					}
-
+					System.out.println(detect_line_type(in));
 				}
-//		        String[] var = line.split(":");
 		    }
 			
 			
@@ -61,10 +50,18 @@ public class Txt_information_spliter {
 
     	return null;
     }
-    public String get_tag(String line) {
+    public JSONObject get_tag(String line) {
     	if (line.contains(":")) {
     		String[] v = line.split(":");
-    		return v[0];
+    		JSONObject Tag_body = new JSONObject();
+    		try {
+				Tag_body.put("tag",v[0]);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		
+    		return Tag_body;
     	}
 		return null;
     	
@@ -78,9 +75,49 @@ public class Txt_information_spliter {
 		return null;	
     }
     
-    public String get_price(String line) {
+    public JSONObject detect_line_type(BufferedReader in) {
+    	JSONObject tag = null;
+    	JSONObject whole = new JSONObject();
+    	try {
+			while((line = in.readLine()) != null){
+				if (line.contains("ame:")){
+					whole.append("tag",tag);
+//					System.out.println("tag ended");
+//					System.out.println(line+" end met"); 
+					return whole;
+				}
+				if (!line.contains("ame:") && line.contains(":")){
+					//tag detected
+					if (tag != null) {
+						System.out.println("tag detected");
+						whole.append("tag",tag);
+					}
+					tag = get_tag(line);
+				}
+				else if(line.contains(";")){
+					JSONObject dish = new JSONObject();
+					String[] dishes = get_dishes(line);
+					for (String a : dishes) {
+
+			            dish.put("Name", a.split("=")[0]);
+			            dish.put("Price", a.split("=")[1]);
+//			            System.out.println(dish); 
+//			            System.out.println(tag); 
+			            tag.append("dishes", dish);
+					}
+				}
+			}
+
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
     	
-    	return null;
     }
     
 }

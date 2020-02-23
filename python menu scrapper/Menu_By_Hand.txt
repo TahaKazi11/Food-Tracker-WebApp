@@ -1,8 +1,8 @@
 ﻿Name:Tim_Holtons
 Meals:
-Tukey_Bacon_Club=5.99,Ham&Chedder=4.99,BLT=4.99,Garden_Vegetable=3.99,3pc_Chicken_strips=5.99,Bacon_Grilled_Chese_Melt=5.99,Turkey_Melt=5.99,Grilled_Cheese_Melt=4.99Chicken_Bacon_Ranch=5.99,Chipotle_Cheddar_Chicken=5.99,Crispy_Chicken_Wrap=5.99,Grilled_Chicken_Wrap=5.99;
+Tukey_Bacon_Club=5.99,Ham&Chedder=4.99,BLT=4.99,Garden_Vegetable=3.99,3pc_Chicken_strips=5.99,Bacon_Grilled_Chese_Melt=5.99,Turkey_Melt=5.99,Grilled_Cheese_Melt=4.99,Chicken_Bacon_Ranch=5.99,Chipotle_Cheddar_Chicken=5.99,Crispy_Chicken_Wrap=5.99,Grilled_Chicken_Wrap=5.99;
 Breakfast_Meals:
-Home_Style_Biscuit=3.79,English_Muffin=4.09,Classic_Bagel_B.E.L.T=4.09,Egg&Chess_English_Muffin=3.59,Farmer's_Wrap,Sausaga&Bacob_Wrap=3.59;
+Home_Style_Biscuit=3.79,English_Muffin=4.09,Classic_Bagel_B.E.L.T=4.09,Egg&Chess_English_Muffin=3.59,Farmer's_Wrap=3.59,Sausaga&Bacob_Wrap=3.59;
 Snacks&Sides:
 Cream_Of_Broccou=3.59,Harvest_Vegetable=4.69,Chili=4.69,Potato_Wedges=2.19,Hash_Brown=1.59;
 Cold_Drinks:
