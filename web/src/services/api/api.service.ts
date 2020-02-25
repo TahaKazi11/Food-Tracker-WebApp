@@ -6,9 +6,12 @@ import { ApiErrorTechnical } from './errors/api.error.technical';
 import { ApiErrorEmptyContent } from './errors/api.error.empty.content';
 import { ApiErrorEmptyResponse } from './errors/api.error.empty.response';
 import { ApiError } from './errors/api.error';
+import { Injectable } from '@angular/core';
+import { RestaurantList, RestaurantMenu, Restaurant } from 'src/main';
+
 
 const apiBase = () => {
-    return 'http://frontend.northbuilding.ca:27580/v2';
+    return '52.186.68.121:27580/v1'; // IP for server
 };
 
 const urls = {
@@ -20,13 +23,53 @@ const urls = {
     },
     restaurants   : {
       menu: (restaurantId: string,
-      ) => `${ apiBase() }/menu/by-restaurants/${ restaurantId }`
+      ) => `${ apiBase() }/menu/by-restaurants/${ restaurantId }`,
+      list: (
+        ) => `${ apiBase() }/restaurants`,
+      full: (restaurantId: string
+        ) => `${ apiBase() }/full-info/by-restaurant-id/${ restaurantId }`,
+      byAccount: (userAccountId: string
+        ) => `${ apiBase() }/restaurants/by-account-id/${ userAccountId }`,
     },
+
+
 };
 
 export class ApiService {
 
     private static axiosService            = AxiosService.getInstance();
+
+    public static requestingRestaurants(userAccountId: string): Promise<Restaurant[]> {
+      return this.requestingFromApiWithRetries<Restaurant[]>(urls.restaurants.byAccount(userAccountId), 1); // TODO add try catch for handling a not found restraunt not found
+    }
+
+    public static requestingRestaurant(restrauntId: string): Promise<Restaurant> {
+      return this.requestingFromApiWithRetries<Restaurant>(urls.restaurants.menu(restrauntId), 1); // TODO add try catch for handling a not found restraunt not found
+    }
+
+    public static requestingMenuFromRestaurant(restrauntId: string): Promise<RestaurantMenu> {
+      return this.requestingFromApiWithRetries<RestaurantMenu>(urls.restaurants.menu(restrauntId), 1); // TODO add try catch for handlign menu not found
+    }
+
+    public static requestingRestaurantList(): Promise<RestaurantList> {
+      return this.requestingFromApiWithRetries<RestaurantList>(urls.restaurants.list(), 2); // TODO add try catch for bad gateway
+    }
+
+    private static async requestingFromApiWithRetries<T>(path: string, maxRetries = 0, numRetry = 0): Promise<T> {
+      try {
+        return await ApiService.requestingFromAPI<T>(path);
+      } catch (e) {
+        const statusCode  = e.response ?  e.response.status :  e.code;
+        const isRetryable = statusCode !== 400 && statusCode !== 403 && statusCode !== 204;
+        if (isRetryable && numRetry < maxRetries) {
+          const delayBase = (statusCode === 429 ? 5000 : 1000);
+          const delayMs   = delayBase + numRetry * delayBase;
+          await new Promise((resolve) => setTimeout(resolve, delayMs));
+          return ApiService.requestingFromApiWithRetries<T>(path, maxRetries, numRetry + 1);
+        }
+        throw e;
+      }
+    }
 
 
     /**
