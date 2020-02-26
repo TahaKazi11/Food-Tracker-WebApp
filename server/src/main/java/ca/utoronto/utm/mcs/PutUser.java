@@ -1,5 +1,6 @@
 package ca.utoronto.utm.mcs;
 
+
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -20,9 +21,9 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.bson.BsonArray;
 
-public class GetProfile{
+public class PutUser{
 
-    public void GetProfile(HttpExchange r) throws IOException, JSONException {
+    public void PutUser(HttpExchange r) throws IOException, JSONException {
 
         MongoClientURI uri = new MongoClientURI("mongodb://north_building:utmfoodtracker@utmfood-shard-00-00-cyzxf.azure.mongodb.net:27017,utmfood-shard-00-01-cyzxf.azure.mongodb.net:27017,utmfood-shard-00-02-cyzxf.azure.mongodb.net:27017/test?ssl=true&replicaSet=UTMFood-shard-0&authSource=admin&retryWrites=true&w=majority&maxIdleTimeMS=5000");
         MongoClient mongoClient = new MongoClient(uri);
@@ -39,20 +40,17 @@ public class GetProfile{
 
         String result = "";
         try{
-            if (r.getRequestBody().equals("GET")){
-                if (deserialized.has("_id")){
-                    String value = deserialized.get("_id").toString();
-                    FindIterable<Document> findIterable = collection.find(Filters.eq("_id", new ObjectId(value)));
-                    MongoCursor<Document> dbCursor = findIterable.iterator();
-                    if(dbCursor.hasNext()){
-                        result = dbCursor.next().toJson().toString();
-                    }else{
-                        r.sendResponseHeaders(404, -1);
-                        return;
-                    }
-                    r.sendResponseHeaders(200, result.getBytes().length);
+            if (r.getRequestBody().equals("PUT")){
+
+                if (deserialized.has("name")){
+                    //the user information json format need to be determined
+                    Document userInfo = Document.parse( body );
+                    collection.insertOne(userInfo);
+                    ObjectId id = (ObjectId)userInfo.get( "_id" );
+                    System.out.println(id);
+                    r.sendResponseHeaders(200, id.toString().getBytes().length);
                     OutputStream os = r.getResponseBody();
-                    os.write(result.getBytes());
+                    os.write(id.toString().getBytes());
                     os.close();
                     }
                 }
