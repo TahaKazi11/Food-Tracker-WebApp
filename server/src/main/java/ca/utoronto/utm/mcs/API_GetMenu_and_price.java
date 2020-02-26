@@ -68,8 +68,8 @@ public class API_GetMenu_and_price implements HttpHandler {
         String body = convert(r.getRequestBody());
         JSONObject deserialized = new JSONObject(body);
 
-        if (deserialized.has("restaurant")){
-            first = deserialized.getString("restaurant");
+        if (deserialized.has("_id")){
+            first = deserialized.getString("_id");
             firstsetted = true;}
         if (!firstsetted){
             r.sendResponseHeaders(400,-1);
@@ -78,16 +78,6 @@ public class API_GetMenu_and_price implements HttpHandler {
         }catch (Exception e){
             r.sendResponseHeaders(400,-1);
             e.printStackTrace();
-        }
-        try {
-            MongoClient db =  connecter.getMongoDBConnection();
-
-            MongoDatabase dbdata = db.getDatabase("UTMFoodTracker");
-    
-            MongoCollection collection = dbdata.getCollection("Menus");
-        } catch (Exception e) {
-            r.sendResponseHeaders(500,-1);
-            return;
         }
 
 
