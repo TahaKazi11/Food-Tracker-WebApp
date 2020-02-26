@@ -50,8 +50,10 @@ public class Txt_information_spliter {
     public String[] get_Nutritional() {
     	if (line.contains("ame:")){
     		if (line.contains("+")) {
-        		String Nus = (line.split("@")[1]);
-        		Nutritional = Nus.split("+");
+				String Nus = (line.split("@")[1]);
+				System.out.println(Nus);
+				System.out.println(Nus.split("&"));
+        		Nutritional = Nus.split("&");
     		}
     		else {
     			Nutritional = new String[] {line.split("@")[1]};
