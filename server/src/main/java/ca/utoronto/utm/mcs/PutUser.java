@@ -23,7 +23,7 @@ import org.bson.BsonArray;
 
 public class PutUser{
 
-    public void PutUser(HttpExchange r) throws IOException, JSONException {
+    public void handle(HttpExchange r) throws IOException, JSONException {
 
         MongoClientURI uri = new MongoClientURI("mongodb://north_building:utmfoodtracker@utmfood-shard-00-00-cyzxf.azure.mongodb.net:27017,utmfood-shard-00-01-cyzxf.azure.mongodb.net:27017,utmfood-shard-00-02-cyzxf.azure.mongodb.net:27017/test?ssl=true&replicaSet=UTMFood-shard-0&authSource=admin&retryWrites=true&w=majority&maxIdleTimeMS=5000");
         MongoClient mongoClient = new MongoClient(uri);

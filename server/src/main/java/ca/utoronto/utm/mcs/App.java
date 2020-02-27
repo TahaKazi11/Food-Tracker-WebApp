@@ -14,5 +14,8 @@ public class App
         MongoDBConnector connector = new MongoDBConnector();
         MongoClient connection = connector.getMongoDBConnection();
         RetrieveHoursOfOperation result = new RetrieveHoursOfOperation(connection, building);
+
+        server.createContext("/api/getProfile", new GetProfile());
+        server.createContext("/api/getProfile", new PutUser());
     }
 }
