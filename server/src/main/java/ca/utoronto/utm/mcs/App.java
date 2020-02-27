@@ -25,10 +25,13 @@ public class App
         server.createContext("/getRestaurants", new GetRestaurantsHandler(connection)); //Should be depenedecy injected
         server.createContext("/full-info/by-restaurant-id", new GetRestaurantHandler(connection)); //Should be depenedecy injected
         server.createContext("/userLoginAuthenticate", new GoogleTokenVerifierHandler(connection));
+              server.createContext("/api/getProfile", new GetProfile());
+        server.createContext("/api/getProfile", new PutUser());
 
         server.start();
         System.out.printf("Server started on port %d...\n", PORT);
 
         //RetrieveHoursOfOperation result = new RetrieveHoursOfOperation(connection, building);
+
     }
 }
