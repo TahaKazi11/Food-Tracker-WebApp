@@ -10,6 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DailyDigestComponent } from './daily-digest/daily-digest.component';
 import { RestaurantSummaryComponent } from './restaurant/restaurant-summary/restaurant-summary.component';
 import { MenuComponent } from './menu/menu.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MenuComponent } from './menu/menu.component';
     NavbarComponent,
     DailyDigestComponent,
     RestaurantSummaryComponent,
-    MenuComponent
+    MenuComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
