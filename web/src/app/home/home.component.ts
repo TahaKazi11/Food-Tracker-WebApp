@@ -9,21 +9,22 @@ import { RestaurantList, RestaurantMenu, Restaurant, MenuItem } from 'src/main';
 })
 export class HomeComponent implements OnInit {
 
-  protected restrauntList: Restaurant[];
+  protected restrauntList: Restaurant[] = [];
+  protected restrauntNameList: string[];
 
   constructor() {
   }
 
   ngOnInit() {
     this.loadRestaurantsNoLogin();
-    this.fillRestaurantList(); // TODO: Remove this function when we have data from the backend 
+    //this.fillRestaurantList(); // TODO: Remove this function when we have data from the backend 
   }
 
-  private loadRestaurantsNoLogin() {
-    const restraunts = this.loadRestaurantList();
-    if (!this.restrauntList) {
-      return; // TODO reload button here;
-    }
+  private async loadRestaurantsNoLogin() {
+    const restraunts = await this.loadRestaurantList();
+    // if (!this.restrauntNameList) {
+    //   return; // TODO reload button here;
+    // }
     restraunts.forEach((restraunt) => {
       ApiService.requestingRestaurant(restraunt)
       .then((data) => {
@@ -43,19 +44,20 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  private loadRestaurantList(): string[] {
+  private async loadRestaurantList() {
     let restraunts: string[];
-    ApiService.requestingRestaurantList()
-    .then((data) => {
-      if (!data) {
-        // TODO display refeshbutton error
-      } else {
-        restraunts = data.restaurantlist;
-      }
-    }).catch((error) => {
-        return [];
-    });
-    return restraunts;
+    return (await ApiService.requestingRestaurantList()).restaurantlist;
+    // .then((data) => {
+    //   if (!data) {
+    //     // TODO display refeshbutton error
+    //   } else {
+    //     restraunts = data.restaurantlist;
+
+    //   }
+    // }).catch((error) => {
+    //     return [];
+    // });
+    // return restraunts;
   }
 
   // ** MOCKS BELOW DELETE WHEN BACKEND IS READY */
