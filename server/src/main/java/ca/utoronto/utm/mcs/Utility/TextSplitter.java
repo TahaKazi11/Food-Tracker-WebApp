@@ -1,4 +1,4 @@
-package ca.utoronto.utm.mcs;
+package ca.utoronto.utm.mcs.Utility;
 
 import java.io.IOException;
 
@@ -10,13 +10,13 @@ import java.io.FileReader;
 import org.json.*;
 
 
-public class Txt_information_spliter {
+public class TextSplitter {
     private String Restaurant;
     private String File;
     private String[] Nutritional ;
     private String line;
     
-    public Txt_information_spliter(String Restaurant_name,String File_name) {
+    public TextSplitter(String Restaurant_name, String File_name) {
    
     	this.Restaurant = Restaurant_name;
     	this.File = File_name;
