@@ -19,6 +19,11 @@
           <artifactId>mongo-java-driver</artifactId>
           <version>3.12.1</version>
       </dependency>
+      <dependency>
+          <groupId>com.google.api-client</groupId>
+          <artifactId>google-api-client</artifactId>
+          <version>1.30.4</version>
+      </dependency>
     <dependency>
         <groupId>org.json</groupId>
         <artifactId>json</artifactId>
