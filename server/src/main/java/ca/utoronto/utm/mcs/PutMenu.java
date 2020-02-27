@@ -13,7 +13,7 @@ import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import com.mongodb.client.model.Filters.*;
 
-public class put_menu_NOR_46 {
+public class PutMenu {
 	private static MongoDBConnector connecter = new MongoDBConnector();
 	private static String res[] = { "Tim_Holtons", "Shawama_The_Meeting_Place", "Rotisserie_The_Food_Court",
 			"Pizza_Pizza", "Harvey's" };
