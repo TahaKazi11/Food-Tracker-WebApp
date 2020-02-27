@@ -1,4 +1,4 @@
-package ca.utoronto.utm.mcs;
+package ca.utoronto.utm.mcs.Handlers;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;

@@ -11,7 +11,7 @@ import { RestaurantList, RestaurantMenu, Restaurant } from 'src/main';
 
 
 const apiBase = () => {
-    return '52.186.68.121:27580/v1'; // IP for server
+    return 'http://localhost:8080'; // IP for server
 };
 
 const urls = {
@@ -25,9 +25,9 @@ const urls = {
       menu: (restaurantId: string,
       ) => `${ apiBase() }/menu/by-restaurants/${ restaurantId }`,
       list: (
-        ) => `${ apiBase() }/restaurants`,
+        ) => `${ apiBase() }/getRestaurants`,
       full: (restaurantId: string
-        ) => `${ apiBase() }/full-info/by-restaurant-id/${ restaurantId }`,
+        ) => `${ apiBase() }/full-info/by-restaurant-id?name=${ restaurantId }`,
       byAccount: (userAccountId: string
         ) => `${ apiBase() }/restaurants/by-account-id/${ userAccountId }`,
     },
@@ -44,7 +44,7 @@ export class ApiService {
     }
 
     public static requestingRestaurant(restrauntId: string): Promise<Restaurant> {
-      return this.requestingFromApiWithRetries<Restaurant>(urls.restaurants.menu(restrauntId), 1); // TODO add try catch for handling a not found restraunt not found
+      return this.requestingFromApiWithRetries<Restaurant>(urls.restaurants.full(restrauntId), 1); // TODO add try catch for handling a not found restraunt not found
     }
 
     public static requestingMenuFromRestaurant(restrauntId: string): Promise<RestaurantMenu> {
@@ -104,7 +104,6 @@ export class ApiService {
 
         responseData = response.data;
         header       = response.headers;
-
         switch (response.status) {
           case 200:
             const hasContent = responseData && (Array.isArray(responseData) || Object.keys(responseData).length > 0);
