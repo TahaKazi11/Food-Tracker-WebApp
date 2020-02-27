@@ -10,4 +10,5 @@
 1. Try to finish your tasks earlier and not leave it till the day before the demo to avoid compiling issues just before the demo
 
 **What are (if any) harmful practices you should stop using during the next sprint**
+
 N/A
