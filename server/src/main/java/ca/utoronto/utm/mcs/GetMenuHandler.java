@@ -28,13 +28,13 @@ import org.bson.types.ObjectId;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Filters.*;
 
-public class API_GetMenu_and_price implements HttpHandler {
+public class GetMenuHandler implements HttpHandler {
 
     private static MongoDBConnector connecter = new MongoDBConnector();
     private String menu_link = "python menu scrapper/Menu_By_Hand.txt";
     private Txt_information_spliter Spliter;
 
-    public API_GetMenu_and_price() {
+    public GetMenuHandler() {
     }
    
     public void handle(HttpExchange r) {
