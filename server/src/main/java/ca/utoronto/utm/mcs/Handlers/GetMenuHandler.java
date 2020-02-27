@@ -1,4 +1,4 @@
-package ca.utoronto.utm.mcs;
+package ca.utoronto.utm.mcs.Handlers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,6 +8,8 @@ import java.io.OutputStream;
 
 import java.util.stream.Collectors;
 
+import ca.utoronto.utm.mcs.MongoDBConnector;
+import ca.utoronto.utm.mcs.Utility.TextSplitter;
 import org.json.*;
 import com.mongodb.MongoClient;
 
@@ -21,18 +23,15 @@ import org.bson.conversions.Bson;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Filters.*;
 
 public class GetMenuHandler implements HttpHandler {
 
     private static MongoDBConnector connecter = new MongoDBConnector();
     private String menu_link = "python menu scrapper/Menu_By_Hand.txt";
-    private Txt_information_spliter Spliter;
+    private TextSplitter Spliter;
 
     public GetMenuHandler() {
     }
@@ -100,7 +99,7 @@ public class GetMenuHandler implements HttpHandler {
             r.sendResponseHeaders(500,-1);
             return;
         }
-        // Spliter = new  Txt_information_spliter(first,menu_link);
+        // Spliter = new  TextSplitter(first,menu_link);
         // response = Spliter.Search_Restaurant();
         if (response == null) {
         	r.sendResponseHeaders(400,-1);
