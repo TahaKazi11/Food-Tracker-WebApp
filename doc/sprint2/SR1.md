@@ -8,7 +8,6 @@
 **What are some new practices that you might want to use during the next sprint**
 
 1. Try to finish your tasks earlier and not leave it till the day before the demo to avoid compiling issues just before the demo
-2. Use more agile methodology by adapting to changes in our plans
 
 **What are (if any) harmful practices you should stop using during the next sprint**
-1. Stop letting your tasks be passed on to someone else. Every member should plan ahead with their ticket to avoid teammates having to do other's work.
+N/A
