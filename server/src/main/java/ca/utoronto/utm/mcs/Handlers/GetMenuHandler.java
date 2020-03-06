@@ -86,7 +86,7 @@ public class GetMenuHandler implements HttpHandler {
 
 		MongoCollection collection = dbdata.getCollection("Menus");
 
-		Bson filter = Filters.eq("Name", new ObjectId(first));
+		Bson filter = Filters.eq("Name", first);
 
 		FindIterable<Document> findIt = collection.find(filter);
 
