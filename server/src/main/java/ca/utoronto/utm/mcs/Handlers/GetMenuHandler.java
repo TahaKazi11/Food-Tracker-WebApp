@@ -67,8 +67,8 @@ public class GetMenuHandler implements HttpHandler {
         String body = convert(r.getRequestBody());
         JSONObject deserialized = new JSONObject(body);
 
-        if (deserialized.has("_id")){
-            first = deserialized.getString("_id");
+        if (deserialized.has("Name")){
+            first = deserialized.getString("Name");
             firstsetted = true;}
         if (!firstsetted){
             r.sendResponseHeaders(400,-1);
@@ -86,7 +86,7 @@ public class GetMenuHandler implements HttpHandler {
 
 		MongoCollection collection = dbdata.getCollection("Menus");
 
-		Bson filter = Filters.eq("_id", new ObjectId("5e56c3b33006e4042690dcb7"));
+		Bson filter = Filters.eq("Name", first);
 
 		FindIterable<Document> findIt = collection.find(filter);
 
