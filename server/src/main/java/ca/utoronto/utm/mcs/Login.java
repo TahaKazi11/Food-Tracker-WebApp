@@ -16,13 +16,15 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.and;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.bson.BsonArray;
 
-public class GetProfile implements HttpHandler{
+public class Login implements HttpHandler{
     private MongoClient mongoClient;
-    public GetProfile(MongoClient client) {
+    public Login(MongoClient client) {
         this.mongoClient = client;
     }
 
@@ -43,8 +45,8 @@ public class GetProfile implements HttpHandler{
     public void handleGet(HttpExchange r) throws IOException, JSONException {
 
 
-        String DatabaseName = ""; //to be filled
-        String collectionName = ""; // to be filled
+        String DatabaseName = "UTMFoodTracker"; //to be filled
+        String collectionName = "Users"; // to be filled
 
         
         MongoDatabase dbdata = this.mongoClient.getDatabase(DatabaseName); 
@@ -55,10 +57,10 @@ public class GetProfile implements HttpHandler{
 
         String result = "";
         try{
-            if (r.getRequestBody().equals("GET")){
-                if (deserialized.has("_id")){
-                    String value = deserialized.get("_id").toString();
-                    FindIterable<Document> findIterable = collection.find(Filters.eq("_id", new ObjectId(value)));
+                if (deserialized.has("email")&&deserialized.has("password")){
+                    String email = deserialized.get("email").toString();
+                    String pass = Utils.passEncrypt(deserialized.get("password").toString());
+                    FindIterable<Document> findIterable = collection.find(and(eq("email", email), eq("password", pass)));
                     MongoCursor<Document> dbCursor = findIterable.iterator();
                     if(dbCursor.hasNext()){
                         result = dbCursor.next().toJson().toString();
@@ -71,7 +73,6 @@ public class GetProfile implements HttpHandler{
                     os.write(result.getBytes());
                     os.close();
                     }
-                }
             else{
                 r.sendResponseHeaders(400, -1);
                 return;

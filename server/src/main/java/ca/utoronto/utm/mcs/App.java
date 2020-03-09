@@ -13,6 +13,7 @@ import org.bson.Document;
 import com.mongodb.client.MongoCollection;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
+import com.sun.net.httpserver.*;
 
 public class App 
 {
@@ -25,8 +26,9 @@ public class App
         server.createContext("/getRestaurants", new GetRestaurantsHandler(connection)); //Should be depenedecy injected
         server.createContext("/full-info/by-restaurant-id", new GetRestaurantHandler(connection)); //Should be depenedecy injected
         server.createContext("/userLoginAuthenticate", new GoogleTokenVerifierHandler(connection));
-              server.createContext("/api/getProfile", new GetProfile());
-        server.createContext("/api/getProfile", new PutUser());
+        server.createContext("/api/getProfile", new GetProfile(connection));
+        server.createContext("/api/addUser", new PutUser(connection));
+        server.createContext("/api/login", new Login(connection));
 
         server.start();
         System.out.printf("Server started on port %d...\n", PORT);
