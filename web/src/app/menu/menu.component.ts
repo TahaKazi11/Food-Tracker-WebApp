@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RestaurantMenu, Restaurant, MenuItem } from 'src/main';
+import { RestaurantMenu, Restaurant, MenuItem, MenuSection } from 'src/main';
 import { ApiService } from './../../services/api/api.service';
 
 @Component({
@@ -10,40 +10,31 @@ import { ApiService } from './../../services/api/api.service';
 })
 export class MenuComponent implements OnInit {
   public url: string = '';
-  public restaurant_name = '';
+  public restaurantName = '';
   public searchTerm = '';
+  public hasData = false;
 
-  public menu: MenuItem[];
+  public menu: MenuSection[];
 
   constructor(private router: Router) { }
 
   ngOnInit() {
     this.url = this.router.url;
-    console.log(this.url);
-    this.restaurant_name = this.url.split('/')[2]
-    console.log(this.restaurant_name);
-    this.create_menu();
+    this.restaurantName = decodeURIComponent(this.url.split('/')[2]);
+    this.createMenu();
+    this.hasData = this.menu.length > 0;
   }
 
-  public create_menu(){
+  public async createMenu() {
     this.menu = [];
-    for(let i = 0; i<10; i++){
-      this.menu.push(this.mockMenuItem());
-    }
-    console.log("created menu");
+    const restaurant = await ApiService.requestingMenuFromRestaurant(this.restaurantName);
+    this.menu = restaurant.menu;
+    console.log(this.menu);
   }
 
   public async onSearchSubmission() {
-    this.menu = await ApiService.searchingMenuList(this.restaurant_name, this.searchTerm);
+    this.menu = await ApiService.searchingMenuList(this.restaurantName, this.searchTerm);
   }
 
-  private mockMenuItem(): MenuItem {
-    const menuItem = {
-      image: 'https://media.discordapp.net/attachments/666763770327990345/679081001019768849/Final_Logo.png?width=571&height=571',
-      calories: 10000,
-      name: 'Timbit',
-      price: 10,
-    } as MenuItem;
-    return menuItem;
-  }
+
 }

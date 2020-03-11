@@ -16,13 +16,18 @@ export interface RestaurantList {
 }
 
 export interface RestaurantMenu {
-  'menu': MenuItem[];
+  'menu': MenuSection[];
+}
+
+export interface MenuSection {
+  'tag': string;
+  'dishes': MenuItem[];
 }
 
 export interface MenuItem {
-  'name': string;
-  'calories': number;
-  'price': number;
+  'Name': string;
+  'Calories': number;
+  'Price': number;
 }
 
 export interface Restaurant {

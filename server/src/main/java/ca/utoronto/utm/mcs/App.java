@@ -3,6 +3,7 @@ package ca.utoronto.utm.mcs;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
+import ca.utoronto.utm.mcs.Handlers.GetMenuHandler;
 import ca.utoronto.utm.mcs.Handlers.GetRestaurantsHandler;
 import ca.utoronto.utm.mcs.Handlers.GetRestaurantHandler;
 import ca.utoronto.utm.mcs.Handlers.GoogleTokenVerifierHandler;
@@ -29,6 +30,7 @@ public class App
         server.createContext("/api/getProfile", new GetProfile(connection));
         server.createContext("/api/addUser", new PutUser(connection));
         server.createContext("/api/login", new Login(connection));
+        server.createContext("/menu/by-restaurant", new GetMenuHandler(connection));
 
         server.start();
         System.out.printf("Server started on port %d...\n", PORT);

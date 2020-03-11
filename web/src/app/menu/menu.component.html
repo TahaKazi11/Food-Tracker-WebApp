@@ -1,5 +1,5 @@
 <div class="title">
-    <h2>{{restaurant_name}} Menu</h2>
+    <h2>{{restaurantName}} Menu</h2>
 </div>
 <div class="search-box">
     <div class="md-form ">
@@ -10,14 +10,17 @@
     </div>
 </div>
 
-<div class="row row-cols-1 row-cols-md-3 menu">
-    <div *ngFor = "let item of menu">
-        <div class="col mb-4">
-            <div class="card h-100">
-                <img src="{{item.image}}" class="card-img-top" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title">{{item.name}}</h4>
-                    <p class="card-text">price :${{item.price}} calories: {{item.calories}}</p>
+<div class="menu">
+    <div *ngFor = "let section of menu">
+        <h1>{{section.tag}}</h1>
+        <div class="row mb-4">
+            <div *ngFor = "let item of section.dishes">
+                <div class="card h-100">
+                    <img src="https://media.discordapp.net/attachments/666763770327990345/679081001019768849/Final_Logo.png?width=571&height=571" class="card-img-top" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">{{item.Name}}</h4>
+                        <p class="card-text">price: {{item.Price}}$ calories: {{item.Calories}}</p>
+                    </div>
                 </div>
             </div>
         </div>  
