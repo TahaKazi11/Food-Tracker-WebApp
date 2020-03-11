@@ -20,6 +20,9 @@
                     <div class="card-body">
                         <h4 class="card-title">{{item.Name}}</h4>
                         <p class="card-text">price: {{item.Price}}$ calories: {{item.Calories}}</p>
+                        <div class="btn btn-info btn-lg" (click)="onAddToCard(item.Name, item.Calories, item.Price)">
+                            <i class="fa fa-shopping-cart"></i>
+                        </div>
                     </div>
                 </div>
             </div>
