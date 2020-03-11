@@ -6,10 +6,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import ca.utoronto.utm.mcs.MongoDBConnector;
 import ca.utoronto.utm.mcs.Utility.TextSplitter;
+import ca.utoronto.utm.mcs.Utility.Utils;
+import com.mongodb.BasicDBObject;
 import org.json.*;
 import com.mongodb.MongoClient;
 
@@ -29,13 +33,14 @@ import com.mongodb.client.model.Filters;
 
 public class GetMenuHandler implements HttpHandler {
 
-    private static MongoDBConnector connecter = new MongoDBConnector();
-    private String menu_link = "python menu scrapper/Menu_By_Hand.txt";
-    private TextSplitter Spliter;
+    private MongoClient mongoClient;
 
-    public GetMenuHandler() {
+
+    public GetMenuHandler(MongoClient client) {
+        this.mongoClient = client;
     }
-   
+
+    @Override
     public void handle(HttpExchange r) {
         try {
             if (r.getRequestMethod().equals("GET")) {
@@ -46,71 +51,27 @@ public class GetMenuHandler implements HttpHandler {
             e.printStackTrace();
         }
     }
-    
-    
-    public static String convert(InputStream inputStream) throws IOException {
-    	 
-        try (BufferedReader buffer = new BufferedReader(new InputStreamReader(inputStream))) {
-            return buffer.lines().collect(Collectors.joining(System.lineSeparator()));
-	}}
 
-
-    public void handleGet(HttpExchange r) throws IOException, JSONException{
-        /* TODO: Implement this.
-           Hint: This is very very similar to the get just make sure to save
-                 your result in memory instead of returning a value.*/
-
-        JSONObject response = new JSONObject();
-        Boolean firstsetted = false;
-        String first = "";
-        try{
-        String body = convert(r.getRequestBody());
-        JSONObject deserialized = new JSONObject(body);
-
-        if (deserialized.has("Name")){
-            first = deserialized.getString("Name");
-            firstsetted = true;}
-        if (!firstsetted){
-            r.sendResponseHeaders(400,-1);
-            return;
+    public void handleGet(HttpExchange httpExchange) throws JSONException, IOException {
+        Map<String, String> queryParams = Utils.queryToMap(httpExchange.getRequestURI().getQuery());
+        String restrauntName = queryParams.get("name");
+        MongoDatabase database = this.mongoClient.getDatabase("UTMFoodTracker");
+        MongoCollection<Document> collection = database.getCollection("Menus");
+        BasicDBObject query = new BasicDBObject();
+        query.put("Name", restrauntName);
+        FindIterable<Document> iterable = collection.find(query);
+        if(iterable.first() != null) {
+            Utils.writeResponse(httpExchange, getFinalJSON(iterable.first()).toString(), 200);
+        } else {
+            Utils.writeResponse(httpExchange, "", 404);
         }
-        }catch (Exception e){
-            r.sendResponseHeaders(400,-1);
-            e.printStackTrace();
-        }
+    }
 
-
-        MongoClient db =  connecter.getMongoDBConnection();
-
-    	MongoDatabase dbdata = db.getDatabase("UTMFoodTracker");
-
-		MongoCollection collection = dbdata.getCollection("Menus");
-
-		Bson filter = Filters.eq("Name", first);
-
-		FindIterable<Document> findIt = collection.find(filter);
-
-		MongoCursor<Document> mongoCursor = findIt.iterator();
-
-		if (mongoCursor.hasNext()){
-			response = new JSONObject(mongoCursor.next().toJson().toString());
-        }
-        else{
-            r.sendResponseHeaders(500,-1);
-            return;
-        }
-        // Spliter = new  TextSplitter(first,menu_link);
-        // response = Spliter.Search_Restaurant();
-        if (response == null) {
-        	r.sendResponseHeaders(400,-1);
-        }
-        else {
-            r.sendResponseHeaders(200,response.toString().getBytes().length);   
-        }
-        OutputStream os = r.getResponseBody();
-        os.write(response.toString().getBytes());
-        os.close();
-      
+    private JSONObject getFinalJSON(Document restraunt) throws JSONException
+    {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("menu", restraunt.get("Menu"));
+        return jsonObject;
     }
 }
 

@@ -7,7 +7,7 @@ import { ApiErrorEmptyContent } from './errors/api.error.empty.content';
 import { ApiErrorEmptyResponse } from './errors/api.error.empty.response';
 import { ApiError } from './errors/api.error';
 import { Injectable } from '@angular/core';
-import { RestaurantList, RestaurantMenu, Restaurant } from 'src/main';
+import { RestaurantList, RestaurantMenu, Restaurant, MenuItem, MenuSection } from 'src/main';
 
 
 const apiBase = () => {
@@ -23,13 +23,15 @@ const urls = {
     },
     restaurants   : {
       menu: (restaurantId: string,
-      ) => `${ apiBase() }/menu/by-restaurants/${ restaurantId }`,
+      ) => `${ apiBase() }/menu/by-restaurant?name=${ restaurantId }`,
       list: (
         ) => `${ apiBase() }/getRestaurants`,
       full: (restaurantId: string
         ) => `${ apiBase() }/full-info/by-restaurant-id?name=${ restaurantId }`,
       byAccount: (userAccountId: string
         ) => `${ apiBase() }/restaurants/by-account-id/${ userAccountId }`,
+      menuBySearch: (restrauntId: string, searchTerm: string
+          ) => `${ apiBase() }/restaurants/menu/by-search?restrauntId=${ restrauntId }&searchTerm=${ searchTerm }`,
     },
 
 
@@ -53,6 +55,10 @@ export class ApiService {
 
     public static requestingRestaurantList(): Promise<RestaurantList> {
       return this.requestingFromApiWithRetries<RestaurantList>(urls.restaurants.list(), 2); // TODO add try catch for bad gateway
+    }
+
+    public static searchingMenuList(restrauntId: string, searchTerm: string): Promise<MenuSection[]> {
+      return this.requestingFromApiWithRetries<MenuSection[]>(urls.restaurants.menuBySearch(restrauntId, searchTerm), 2); // TODO add try catch for bad gateway
     }
 
     private static async requestingFromApiWithRetries<T>(path: string, maxRetries = 0, numRetry = 0): Promise<T> {
