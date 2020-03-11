@@ -59,17 +59,25 @@ public class GetFoodHandler {
         String food = "";
         food = deserialized.getString("food"); 
         
+        String first = "";
+        
         MongoClient db =  connecter.getMongoDBConnection();
 
     	MongoDatabase dbdata = db.getDatabase("UTMFoodTracker");
+    	
+    	MongoCollection collection = dbdata.getCollection("Menus");
+    			
+    	Bson filter = Filters.eq("Name", first);
 
-		MongoCollection collection = dbdata.getCollection("Menus");
+		FindIterable<Document> findIt = collection.find(filter);
+
+		
 
 		BasicDBObject query = new BasicDBObject();
 		query.put("Food", food);
-        FindIterable<Document> iterable = collection.find(query);
+        FindIterable<Document> iterable = ((MongoCollection) findIt).find(query);
         for(Document doc : iterable) {
-        	foodList.add(doc.get("name").toString()); //i dont know what to add
+        	foodList.add(doc.get("Name").toString()); //i dont know what to add
             Utils.writeResponse(httpExchange, getFinalJSON(foodList).toString(), 200);
             return;
         }
@@ -92,7 +100,7 @@ public class GetFoodHandler {
     private JSONObject getFinalJSON(List<String> foodList) throws JSONException
     {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Restaraunts", foodList); // TODO fix
+        jsonObject.put("Name", foodList); // TODO fix
         return jsonObject;
     }
 	
