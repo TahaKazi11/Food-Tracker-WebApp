@@ -31,6 +31,7 @@ public class App
         server.createContext("/api/addUser", new PutUser(connection));
         server.createContext("/api/login", new Login(connection));
         server.createContext("/menu/by-restaurant", new GetMenuHandler(connection));
+        server.createContext("/addToBudget", new SetBudgetHandler(connection));
 
         server.start();
         System.out.printf("Server started on port %d...\n", PORT);
