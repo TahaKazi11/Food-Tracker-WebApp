@@ -9,11 +9,12 @@ import { ApiService } from './../../services/api/api.service';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  public url : string = "";
-  public restaurant_name : string = "";
+  public url: string = '';
+  public restaurant_name = '';
+  public searchTerm = '';
 
-  public menu : MenuItem[];
-  
+  public menu: MenuItem[];
+
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -30,6 +31,10 @@ export class MenuComponent implements OnInit {
       this.menu.push(this.mockMenuItem());
     }
     console.log("created menu");
+  }
+
+  public async onSearchSubmission() {
+    this.menu = await ApiService.searchingMenuList(this.restaurant_name, this.searchTerm);
   }
 
   private mockMenuItem(): MenuItem {

@@ -1,0 +1,42 @@
+// .search-box {
+//     margin: auto;
+//     width: 50%;
+//     align-items: center;
+//     flex-direction: row;
+//     position: relative;
+
+// }
+
+.title {
+    margin: auto;
+    width: 50%;
+}
+
+
+.search-box {
+    width: 50%;
+    overflow: auto;
+    position: relative;
+    margin: auto;
+  }
+  
+.search-box div {
+    float: left;
+    text-align: center;
+}
+
+.md-form {
+    width: 90%;
+}
+
+.menu {
+    margin-top: 10px;
+}
+
+.btn {
+    border-radius: 0px 5px 5px 0px;
+}
+
+.form-control {
+    border-radius: 5px 0px 0px 5px;
+}
