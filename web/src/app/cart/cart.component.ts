@@ -11,7 +11,10 @@ export class CartComponent implements OnInit {
 
   public items: Array<MenuItem> = [];
   public priceTotal = 0;
-  private accountId = 'jifeof10';
+  private accountId = '5e69a888f1d54f6852d380b0';
+  public confMessage = '';
+  public success: boolean;
+  public showAlert: boolean;
 
   constructor() { }
 
@@ -21,6 +24,9 @@ export class CartComponent implements OnInit {
     this.pushItemToCart({ id: '3', Name: 'Pan-Fried Beef Rice', Calories: 400, Price: 13.99, amount: 2 });
     this.pushItemToCart({ id: '4', Name: 'Secret Chicken with Rice', Calories: 500, Price: 13.88, amount: 3 });
     this.calTotalExpense(this.items);
+    this.success = true;
+    this.confMessage = 'Order confirmed successfully!';
+    this.showAlert = false;
   }
 
   public pushItemToCart(data: MenuItem) {
@@ -57,7 +63,13 @@ export class CartComponent implements OnInit {
   }
 
   public sendExpenseToApi() {
-    ApiService.deductExpense(this.accountId, this.priceTotal.toString());
+    this.showAlert = true;
+    try {
+      ApiService.deductExpense(this.accountId, this.getTotalExpense().toString());
+    } catch (error) {
+      this.confMessage = 'The request did not go through.';
+      this.success = false;
+    }
   }
 
 
