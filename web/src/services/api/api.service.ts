@@ -63,7 +63,7 @@ export class ApiService {
       return this.requestingFromApiWithRetries<MenuSection[]>(urls.restaurants.menuBySearch(restrauntId, searchTerm), 2); // TODO add try catch for bad gateway
     }
 
-    public static deductExpense(userAccountId: string, totalExpense: string): Promise<Deduction> {
+    public static deductExpense(userAccountId: string, amount: string): Promise<Deduction> {
       return this.requestingFromApiWithRetries<Deduction>(urls.user.deductBudget(), 2); // TODO add try catch for bad gateway
     }
 

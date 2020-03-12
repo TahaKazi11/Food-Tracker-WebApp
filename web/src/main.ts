@@ -53,5 +53,5 @@ export interface User {
 
 export interface Deduction {
   '_id': string;
-  'totalExpense': string;
+  'amount': string;
 }
