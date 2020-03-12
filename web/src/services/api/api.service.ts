@@ -1,5 +1,5 @@
 import { AxiosService } from './axios.service';
-import { AxiosResponse} from 'axios';
+import Axios, { AxiosResponse, AxiosRequestConfig} from 'axios';
 import { ApiErrorBadRequest } from './errors/api.error.bad.request.error';
 import { ApiErrorForbidden } from './errors/api.error.forbidden';
 import { ApiErrorTechnical } from './errors/api.error.technical';
@@ -63,8 +63,9 @@ export class ApiService {
       return this.requestingFromApiWithRetries<MenuSection[]>(urls.restaurants.menuBySearch(restrauntId, searchTerm), 2); // TODO add try catch for bad gateway
     }
 
-    public static deductExpense(userAccountId: string, amount: string): Promise<Deduction> {
-      return this.requestingFromApiWithRetries<Deduction>(urls.user.deductBudget(), 2); // TODO add try catch for bad gateway
+    public static deductExpense(userAccountId: string, totalExpense: string): Promise<Deduction> {
+      const config = {'_id': userAccountId, 'amount': totalExpense};
+      return this.requestingFromAPI<Deduction>(urls.user.deductBudget(), JSON.stringify(config), 'put'); // TODO add try catch for bad gateway
     }
 
     private static async requestingFromApiWithRetries<T>(path: string, maxRetries = 0, numRetry = 0): Promise<T> {
@@ -89,13 +90,17 @@ export class ApiService {
      * @param path full path for request.
      */
 
-    private static async requestingFromAPI<T>(path: string): Promise<T> {
+  private static async requestingFromAPI<T>(path: string, config?: string, method?: string): Promise<T> {
         let response: AxiosResponse<any>;
         let responseData: T;
         let header: T;
 
         try {
-            response = await this.axiosService.get(path);
+            if (method === 'put') {
+              response = await this.axiosService.put(path, config);
+            } else {
+              response = await this.axiosService.get(path);
+            }
           } catch (e) {
             response = e.response;
             header = response.headers;

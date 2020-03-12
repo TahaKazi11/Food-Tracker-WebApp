@@ -28,8 +28,8 @@ export class AxiosService {
         return axios.post(url, config);
     }
 
-    public put(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
-        return axios.put(url, config);
+  public put(url: string, config?: string): Promise<AxiosResponse<any>> {
+        return axios.put(url, config, null);
     }
 
 
