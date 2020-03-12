@@ -74,7 +74,7 @@ public class GetFoodHandler {
 		
 
 		BasicDBObject query = new BasicDBObject();
-		query.put("Food", food);
+		query.put("Food", body);
         FindIterable<Document> iterable = ((MongoCollection) findIt).find(query);
         for(Document doc : iterable) {
         	foodList.add(doc.get("Name").toString()); //i dont know what to add
