@@ -54,13 +54,16 @@ public class GetProfile implements HttpHandler{
         JSONObject deserialized = new JSONObject(body);
 
         String result = "";
+        Document preresult = new Document();
         try{
                 if (deserialized.has("_id")){
                     String value = deserialized.get("_id").toString();
                     FindIterable<Document> findIterable = collection.find(Filters.eq("_id", new ObjectId(value)));
                     MongoCursor<Document> dbCursor = findIterable.iterator();
                     if(dbCursor.hasNext()){
-                        result = dbCursor.next().toJson().toString();
+                        preresult = dbCursor.next();
+                        preresult.remove("password");
+                        result = preresult.toJson().toString();
                     }else{
                         r.sendResponseHeaders(404, -1);
                         return;
