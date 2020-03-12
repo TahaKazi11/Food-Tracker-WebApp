@@ -26,7 +26,7 @@ public class SubtractFromBudgetHandler implements HttpHandler {
     public void handle(HttpExchange r) {
         try {
             if (r.getRequestMethod().equals("PUT")) {
-                handlePost(r);
+                handlePut(r);
             } else {
                 r.sendResponseHeaders(400, -1);
             }
@@ -37,15 +37,17 @@ public class SubtractFromBudgetHandler implements HttpHandler {
 
     //front end will give me a user id and a number which is how much they purchased and I will just subtract their
     //budget..Need to think about when budget would reset to original amount..I will send back an alert if their budget goes down
-    private void handlePost(HttpExchange httpExchange) throws JSONException, IOException {
+    private void handlePut(HttpExchange httpExchange) throws JSONException, IOException {
 
-        Map<String, String> queryParams = Utils.queryToMap(httpExchange.getRequestURI().getQuery());
-        String id = queryParams.get("_id");
-        String amount= queryParams.get("amount"); //this is the amount I will receive
+        String body = Utils.convert(httpExchange.getRequestBody());
+        Document deserialized = new Document();
+        deserialized = deserialized.parse(body);
+        String id = deserialized.get("_id").toString();
+        String amount= deserialized.get("amount").toString(); //this is the amount I will receive
         MongoDatabase database = this.mongoClient.getDatabase("UTMFoodTracker");
         MongoCollection<Document> collection = database.getCollection("Users");
         BasicDBObject query = new BasicDBObject();
-        query.put("_id", id);
+        query.put("_id", new ObjectId(id));
         FindIterable<Document> iterable = collection.find(query);
         if(iterable.first() != null) {
             Float budget = Float.parseFloat(iterable.first().get("budget").toString());
