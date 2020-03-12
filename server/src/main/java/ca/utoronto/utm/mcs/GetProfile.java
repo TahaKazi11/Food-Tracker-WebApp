@@ -43,8 +43,8 @@ public class GetProfile implements HttpHandler{
     public void handleGet(HttpExchange r) throws IOException, JSONException {
 
 
-        String DatabaseName = ""; //to be filled
-        String collectionName = ""; // to be filled
+        String DatabaseName = "UTMFoodTracker"; //to be filled
+        String collectionName = "Users"; // to be filled
 
         
         MongoDatabase dbdata = this.mongoClient.getDatabase(DatabaseName); 
@@ -55,7 +55,6 @@ public class GetProfile implements HttpHandler{
 
         String result = "";
         try{
-            if (r.getRequestBody().equals("GET")){
                 if (deserialized.has("_id")){
                     String value = deserialized.get("_id").toString();
                     FindIterable<Document> findIterable = collection.find(Filters.eq("_id", new ObjectId(value)));
@@ -71,7 +70,6 @@ public class GetProfile implements HttpHandler{
                     os.write(result.getBytes());
                     os.close();
                     }
-                }
             else{
                 r.sendResponseHeaders(400, -1);
                 return;
