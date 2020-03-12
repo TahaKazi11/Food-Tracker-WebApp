@@ -10,6 +10,7 @@ import com.sun.net.httpserver.HttpHandler;
 import org.bson.Document;
 import java.util.Map;
 import java.io.IOException;
+import org.bson.types.ObjectId;
 
 public class SetBudgetHandler implements HttpHandler{
 
@@ -35,15 +36,17 @@ public class SetBudgetHandler implements HttpHandler{
     }
 
 
-    private void handlePost(HttpExchange httpExchange) throws IOException{
+    private void handlePut(HttpExchange httpExchange) throws IOException{
 
-        Map<String, String> queryParams = Utils.queryToMap(httpExchange.getRequestURI().getQuery());
-        String id = queryParams.get("_id");
-        String budget = queryParams.get("budget");
+        String body = Utils.convert(httpExchange.getRequestBody());
+        Document deserialized = new Document();
+        deserialized = deserialized.parse(body);
+        String id = deserialized.get("_id").toString();
+        String budget = deserialized.get("budget").toString();
         MongoDatabase database = this.mongoClient.getDatabase("UTMFoodTracker");
         MongoCollection<Document> collection = database.getCollection("Users");
         BasicDBObject query = new BasicDBObject();
-        query.put("_id", id);
+        query.put("_id", new ObjectId(id));
         FindIterable<Document> iterable = collection.find(query);
         if(iterable.first() != null) {
             BasicDBObject updatedDocument = new BasicDBObject();
