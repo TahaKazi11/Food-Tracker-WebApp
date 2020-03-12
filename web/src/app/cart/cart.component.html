@@ -5,7 +5,7 @@
     <li *ngFor="let item of items" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
       <span>
         <a (click)="addFood(item.id)" class="badge badge-pill badge-secondary font-weight-bold color-white"> + </a> &nbsp;
-        <span class="badge badge-success badge-pill sm-font"> {{item.amount}}X </span> &nbsp;
+        <span class="badge badge-success badge-pill sm-font"> {{item.amount}} </span> &nbsp;
         <a (click)="removeFood(item.id)" class="badge badge-pill badge-secondary font-weight-bold color-white"> - </a>
         &nbsp; <span class="font-weight-bold med-font">{{ item.Name }}</span>
       </span>
