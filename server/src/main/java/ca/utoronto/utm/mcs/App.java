@@ -33,7 +33,7 @@ public class App
         server.createContext("/menu/by-restaurant", new GetMenuHandler(connection));
         server.createContext("/setBudget", new SetBudgetHandler(connection));
         server.createContext("/subtractFromBudget", new SubtractFromBudgetHandler(connection));
-        server.createContext("/findRestaurantsByBuilding", new SearchRestaurantsByBuildingHandler(connection));
+        server.createContext("/restaurants/by-building", new SearchRestaurantsByBuildingHandler(connection));
         server.start();
         System.out.printf("Server started on port %d...\n", PORT);
 

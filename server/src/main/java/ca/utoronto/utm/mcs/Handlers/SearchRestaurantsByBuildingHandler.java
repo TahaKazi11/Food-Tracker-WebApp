@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class SearchRestaurantsByBuildingHandler implements HttpHandler {
 
@@ -39,10 +40,12 @@ public class SearchRestaurantsByBuildingHandler implements HttpHandler {
 
     private void handleGet(HttpExchange httpExchange) throws IOException, JSONException {
 
-        String body = Utils.convert(httpExchange.getRequestBody());
+        /* String body = Utils.convert(httpExchange.getRequestBody());
         Document deserialized = new Document();
         deserialized = deserialized.parse(body);
-        String buildingName = deserialized.get("building").toString();
+        String buildingName = deserialized.get("building").toString(); */
+        Map<String, String> queryParams = Utils.queryToMap(httpExchange.getRequestURI().getQuery());
+        String buildingName = queryParams.get("name");
 
         MongoDatabase database = this.mongoClient.getDatabase("UTMFoodTracker");
         MongoCollection<Document> collection = database.getCollection("Restaurants");
