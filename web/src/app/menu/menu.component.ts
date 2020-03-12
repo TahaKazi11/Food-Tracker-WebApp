@@ -36,5 +36,9 @@ export class MenuComponent implements OnInit {
     this.menu = await ApiService.searchingMenuList(this.restaurantName, this.searchTerm);
   }
 
+  public onAddToCard(name: string, calories: string, price: string) {
+    // logic for adding to cart here
+    console.log(name, calories, price);
+  }
 
 }
