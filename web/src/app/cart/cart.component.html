@@ -1,0 +1,21 @@
+<div class="container shadow mt-3 p-5">
+  <h2 class="mb-4">Your selected food</h2>
+  <ul class="list-group ">
+    <li *ngFor="let item of items" class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between align-items-center">
+      <span>
+        <a (click)="addFood(item.id)" class="badge badge-pill badge-secondary font-weight-bold color-white"> + </a> &nbsp;
+        <span class="badge badge-success badge-pill sm-font"> {{item.amount}}X </span> &nbsp;
+        <a (click)="removeFood(item.id)" class="badge badge-pill badge-secondary font-weight-bold color-white"> - </a>
+        &nbsp; <span class="font-weight-bold med-font">{{ item.Name }}</span>
+      </span>
+      <span class="text-decoration-none font-weight-normal med-font">CA$ {{ (item.Price * item.amount).toPrecision(3) }}</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span class="med-font">TOTAL: </span><span class="font-weight-bold med-font badge badge-warning">CA$ {{priceTotal}}</span>
+    </li>
+
+  </ul>
+  <div class="d-flex justify-content-end mt-3">
+    <button (click)="sendExpenseToApi()" type="button" class="btn btn-outline-primary">Confirm Order</button>
+  </div>
+</div>

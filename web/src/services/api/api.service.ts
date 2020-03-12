@@ -7,7 +7,7 @@ import { ApiErrorEmptyContent } from './errors/api.error.empty.content';
 import { ApiErrorEmptyResponse } from './errors/api.error.empty.response';
 import { ApiError } from './errors/api.error';
 import { Injectable } from '@angular/core';
-import { RestaurantList, RestaurantMenu, Restaurant, MenuItem, MenuSection } from 'src/main';
+import { RestaurantList, RestaurantMenu, Restaurant, MenuItem, MenuSection, Deduction } from 'src/main';
 
 
 const apiBase = () => {
@@ -19,7 +19,9 @@ const urls = {
       byAccount   : (userAccountId: string,
       ) => `${ apiBase() }/user/by-account-id/${ userAccountId }`,
       settings: (userAccountId: string,
-      ) => `${ apiBase() }/user/by-account-id/${ userAccountId }`
+      ) => `${ apiBase() }/user/by-account-id/${ userAccountId }`,
+      deductBudget: (
+      ) => `${ apiBase() }/subtractFromBudget`
     },
     restaurants   : {
       menu: (restaurantId: string,
@@ -59,6 +61,10 @@ export class ApiService {
 
     public static searchingMenuList(restrauntId: string, searchTerm: string): Promise<MenuSection[]> {
       return this.requestingFromApiWithRetries<MenuSection[]>(urls.restaurants.menuBySearch(restrauntId, searchTerm), 2); // TODO add try catch for bad gateway
+    }
+
+    public static deductExpense(userAccountId: string, totalExpense: string): Promise<Deduction> {
+      return this.requestingFromApiWithRetries<Deduction>(urls.user.deductBudget(), 2); // TODO add try catch for bad gateway
     }
 
     private static async requestingFromApiWithRetries<T>(path: string, maxRetries = 0, numRetry = 0): Promise<T> {
