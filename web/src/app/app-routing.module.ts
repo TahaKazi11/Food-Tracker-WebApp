@@ -6,6 +6,7 @@ import { DailyDigestComponent } from './daily-digest/daily-digest.component';
 import { MenuComponent } from './menu/menu.component';
 import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'DailyDigest', component: DailyDigestComponent },
   { path: 'Menu/:id', component: MenuComponent },
   { path: 'Register', component: RegisterComponent },
-  { path: 'UserProfile', component: UserProfileComponent }
+  { path: 'UserProfile', component: UserProfileComponent },
+  { path: 'Cart', component: CartComponent }
 ];
 
 @NgModule({

@@ -25,9 +25,11 @@ export interface MenuSection {
 }
 
 export interface MenuItem {
+  'id': string; // uniquely identifies menu item
   'Name': string;
   'Calories': number;
   'Price': number;
+  'amount': number; // the amount of the same menu item, default to 1
 }
 
 export interface Restaurant {
@@ -36,4 +38,20 @@ export interface Restaurant {
   'location': string;
   'hours': string;
   'image': string;
+}
+
+export interface User {
+  '_id': string;
+  'name': string;
+  'email': string;
+  'gender': string;
+  'birth': string;
+  'phone': string;
+  'private': string;
+  'budget': string;
+}
+
+export interface Deduction {
+  '_id': string;
+  'totalExpense': string;
 }
