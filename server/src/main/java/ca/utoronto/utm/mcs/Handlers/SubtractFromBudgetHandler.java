@@ -67,11 +67,7 @@ public class SubtractFromBudgetHandler implements HttpHandler {
     private JSONObject getFinalJSON(Boolean bool) throws JSONException //exceeded will be true when user exceeds their budget
     {
         JSONObject jsonObject = new JSONObject();
-        if (bool){
-            jsonObject.put("exceeded", "True");
-        } else {
-            jsonObject.put("exceeded", "False");
-        }
+        jsonObject.put("exceeded", bool.toString());
         return jsonObject;
     }
 }
