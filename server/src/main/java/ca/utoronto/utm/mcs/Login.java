@@ -56,6 +56,7 @@ public class Login implements HttpHandler{
         JSONObject deserialized = new JSONObject(body);
 
         String result = "";
+        Document preresult = new Document();
         try{
                 if (deserialized.has("email")&&deserialized.has("password")){
                     String email = deserialized.get("email").toString();
@@ -63,7 +64,9 @@ public class Login implements HttpHandler{
                     FindIterable<Document> findIterable = collection.find(and(eq("email", email), eq("password", pass)));
                     MongoCursor<Document> dbCursor = findIterable.iterator();
                     if(dbCursor.hasNext()){
-                        result = dbCursor.next().toJson().toString();
+                        preresult = dbCursor.next();
+                        preresult.remove("password");
+                        result = preresult.toJson().toString();
                     }else{
                         r.sendResponseHeaders(404, -1);
                         return;

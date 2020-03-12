@@ -57,11 +57,12 @@ public class PutUser implements HttpHandler{
     
             String result = "";
             try{
-                if (deserialized.has("name")&&deserialized.has("email")&&deserialized.has("password")){
+                if (deserialized.has("name")&&deserialized.has("email")&&deserialized.has("password")&&deserialized.has("birth")&&deserialized.has("phone")&&deserialized.has("gender")&&deserialized.has("private")){
                         //the user information json format need to be determined
                         Document userInfo = Document.parse( body );
                         String encrString = Utils.passEncrypt(userInfo.get("password").toString());
                         userInfo.put("password", encrString);
+                        userInfo.put("budget", "0");
                         collection.insertOne(userInfo);
                         ObjectId id = (ObjectId)userInfo.get( "_id" );
                         System.out.println(id);
