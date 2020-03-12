@@ -31,6 +31,7 @@ import com.sun.net.httpserver.HttpHandler;
 import org.bson.types.ObjectId;
 
 import com.mongodb.client.model.Filters;
+import com.mongodb.util.JSON;
 
 public class GetFoodHandler {
 	
@@ -54,7 +55,8 @@ public class GetFoodHandler {
 	
 	private void handleGet(HttpExchange httpExchange) throws JSONException, IOException{
 		String body = Utils.convert(httpExchange.getRequestBody());
-		List<String> foodList = new ArrayList<>();
+		//List<String> foodList = new ArrayList<>();
+		JSONArray foodList = new JSONArray();
         JSONObject deserialized = new JSONObject(body); 
         String food = "";
         food = deserialized.getString("food"); 
@@ -74,10 +76,11 @@ public class GetFoodHandler {
 		
 
 		BasicDBObject query = new BasicDBObject();
-		query.put("Food", body);
+		query.put("Food", food);
         FindIterable<Document> iterable = ((MongoCollection) findIt).find(query);
         for(Document doc : iterable) {
-        	foodList.add(doc.get("Name").toString()); //i dont know what to add
+        	//foodList.add(doc.get("Name").toString()); //i dont know what to add
+        	foodList.put(doc.get("Name").toString());
             Utils.writeResponse(httpExchange, getFinalJSON(foodList).toString(), 200);
             return;
         }
@@ -97,7 +100,7 @@ public class GetFoodHandler {
         //Utils.writeResponse(httpExchange, getFinalJSON(restrauntList).toString(), 200);
     }
 	
-    private JSONObject getFinalJSON(List<String> foodList) throws JSONException
+    private JSONObject getFinalJSON(JSONArray foodList) throws JSONException
     {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Name", foodList); // TODO fix
