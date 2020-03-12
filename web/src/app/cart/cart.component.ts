@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'src/main';
 import { ApiService } from '../../services/api/api.service';
+import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 
 @Component({
   selector: 'app-cart',
@@ -63,7 +64,7 @@ export class CartComponent implements OnInit {
   public sendExpenseToApi() {
     this.showAlert = true;
 
-    ApiService.deductExpense(this.accountId, this.getTotalExpense().toString())
+    axios.put('http://localhost:8080/subtractFromBudget', `{"_id": ${this.accountId}, "amount": ${this.getTotalExpense()}}`)
     .then((data) => {
       this.success = true;
       this.confMessage = 'Order confirmed successfully!';

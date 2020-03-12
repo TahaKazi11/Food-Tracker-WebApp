@@ -64,8 +64,7 @@ export class ApiService {
     }
 
     public static deductExpense(userAccountId: string, totalExpense: string): Promise<Deduction> {
-      const config = {'_id': userAccountId, 'amount': totalExpense};
-      return this.requestingFromAPI<Deduction>(urls.user.deductBudget(), JSON.stringify(config), 'put'); // TODO add try catch for bad gateway
+      return this.requestingFromAPI<Deduction>(urls.user.deductBudget()); // TODO add try catch for bad gateway
     }
 
     private static async requestingFromApiWithRetries<T>(path: string, maxRetries = 0, numRetry = 0): Promise<T> {
@@ -90,17 +89,13 @@ export class ApiService {
      * @param path full path for request.
      */
 
-  private static async requestingFromAPI<T>(path: string, config?: string, method?: string): Promise<T> {
+  private static async requestingFromAPI<T>(path: string): Promise<T> {
         let response: AxiosResponse<any>;
         let responseData: T;
         let header: T;
 
         try {
-            if (method === 'put') {
-              response = await this.axiosService.put(path, config);
-            } else {
-              response = await this.axiosService.get(path);
-            }
+            response = await this.axiosService.get(path);
           } catch (e) {
             response = e.response;
             header = response.headers;
