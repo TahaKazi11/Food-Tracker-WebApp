@@ -29,7 +29,7 @@ public class SetBudgetHandler implements HttpHandler{
             if (httpExchange.getRequestMethod().equals("PUT")) {
                 handlePut(httpExchange);
             }
-            else{ r.sendResponseHeaders(400,-1);}
+            else{ httpExchange.sendResponseHeaders(400,-1);}
         } catch (Exception e) {
             e.printStackTrace();
         }
