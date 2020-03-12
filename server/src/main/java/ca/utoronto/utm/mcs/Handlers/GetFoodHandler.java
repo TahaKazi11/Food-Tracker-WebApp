@@ -81,11 +81,11 @@ public class GetFoodHandler {
         for(Document doc : iterable) {
         	//foodList.add(doc.get("Name").toString()); //i dont know what to add
         	foodList.put(doc.get("Name").toString());
-            Utils.writeResponse(httpExchange, getFinalJSON(foodList).toString(), 200);
-            return;
         }
+        Utils.writeResponse(httpExchange, getFinalJSON(foodList).toString(), 200);
+        return;
 
-		MongoCursor<Document> mongoCursor = findIt.iterator();
+		//MongoCursor<Document> mongoCursor = findIt.iterator();
         
         /*
         List<String> foodList = new ArrayList<>();
