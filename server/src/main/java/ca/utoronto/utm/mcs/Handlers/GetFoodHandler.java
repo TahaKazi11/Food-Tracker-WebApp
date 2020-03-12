@@ -35,7 +35,7 @@ import com.mongodb.util.JSON;
 
 public class GetFoodHandler {
 	
-	private Object mongoClient;
+	private MongoClient mongoClient;
 	
 	private static MongoDBConnector connecter = new MongoDBConnector();
 
