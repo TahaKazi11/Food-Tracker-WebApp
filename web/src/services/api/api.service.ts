@@ -1,5 +1,5 @@
 import { AxiosService } from './axios.service';
-import { AxiosResponse} from 'axios';
+import Axios, { AxiosResponse, AxiosRequestConfig} from 'axios';
 import { ApiErrorBadRequest } from './errors/api.error.bad.request.error';
 import { ApiErrorForbidden } from './errors/api.error.forbidden';
 import { ApiErrorTechnical } from './errors/api.error.technical';
@@ -20,8 +20,8 @@ const urls = {
       ) => `${ apiBase() }/user/by-account-id/${ userAccountId }`,
       settings: (userAccountId: string,
       ) => `${ apiBase() }/user/by-account-id/${ userAccountId }`,
-      deductBudget: (
-      ) => `${ apiBase() }/subtractFromBudget`
+      deductBudget: (userAccountId: string, totalExpense: string
+      ) => `${ apiBase() }/subtractFromBudget?_id=${ userAccountId }&amount=${ totalExpense }`
     },
     restaurants   : {
       menu: (restaurantId: string,
@@ -70,7 +70,7 @@ export class ApiService {
     }
 
     public static deductExpense(userAccountId: string, totalExpense: string): Promise<Deduction> {
-      return this.requestingFromApiWithRetries<Deduction>(urls.user.deductBudget(), 2); // TODO add try catch for bad gateway
+      return this.requestingFromAPI<Deduction>(urls.user.deductBudget(userAccountId, totalExpense), 'PUT'); // TODO add try catch for bad gateway
     }
 
     private static async requestingFromApiWithRetries<T>(path: string, maxRetries = 0, numRetry = 0): Promise<T> {
@@ -95,13 +95,20 @@ export class ApiService {
      * @param path full path for request.
      */
 
-    private static async requestingFromAPI<T>(path: string): Promise<T> {
+  private static async requestingFromAPI<T>(path: string, type = 'GET', config = null): Promise<T> {
         let response: AxiosResponse<any>;
         let responseData: T;
         let header: T;
 
         try {
-            response = await this.axiosService.get(path);
+          switch(type) {
+            case 'GET':
+              response = await this.axiosService.get(path);
+              break;
+            case 'PUT':
+              response = await this.axiosService.post(path, config);
+              break;
+            }
           } catch (e) {
             response = e.response;
             header = response.headers;
