@@ -37,7 +37,11 @@ public class GetFoodHandler {
 	
 	private MongoClient mongoClient;
 	
-	private static MongoDBConnector connecter = new MongoDBConnector();
+    public GetFoodHandler(MongoClient client) {
+        this.mongoClient = client;
+    }
+	
+	//private static MongoDBConnector connecter = new MongoDBConnector();
 
 	public void handle(HttpExchange httpExchange) throws IOException
     {
@@ -63,9 +67,9 @@ public class GetFoodHandler {
         
         String first = "";
         
-        MongoClient db =  connecter.getMongoDBConnection();
+        MongoDatabase dbdata = this.mongoClient.getDatabase("UTMFoodTracker");
 
-    	MongoDatabase dbdata = db.getDatabase("UTMFoodTracker");
+    	//MongoDatabase dbdata = db.getDatabase("UTMFoodTracker");
     	
     	MongoCollection collection = dbdata.getCollection("Menus");
     			
@@ -80,7 +84,12 @@ public class GetFoodHandler {
         FindIterable<Document> iterable = ((MongoCollection) findIt).find(query);
         for(Document doc : iterable) {
         	//foodList.add(doc.get("Name").toString()); //i dont know what to add
-        	foodList.put(doc.get("Name").toString());
+        	JSONObject response = new JSONObject();
+        	
+        	response.put("Name", doc.get("Name").toString());
+        	response.put("Calories", doc.get("Calories").toString());
+        	response.put("Cost", doc.get("Cost").toString());
+        	foodList.put(response);
         }
         Utils.writeResponse(httpExchange, getFinalJSON(foodList).toString(), 200);
         return;
