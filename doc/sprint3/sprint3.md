@@ -2,7 +2,7 @@
 
 **Team Capacity:** This sprint we decided to allocate 6-7 hours each to accommodate for the additional sixth user story. This includes the meetings we have before the demo as well as meeting for the demo.
 
-**Sprint goal**: Last sprint we implemented users being able to log in but in order to increase security we want to user some kind of password encryption. We also want users to be able to search for the food they want so they can pick and choose from all the restaurants. For this, we need an available menu. We also want users to see which restaurants are in specific buildings and receive alerts everytime they go over their budget when tracking their food.
+**Sprint goal**: Last sprint we implemented users being able to log in but in order to increase security we want to user some kind of password encryption. We also want users to be able to search for the food they want so they can pick and choose from all the restaurants. For this, we need an available menu. We also want users to see which restaurants are in specific buildings and receive alerts everytime they go over their budget when tracking their food. We had a good idea on how to estimate every user story during Sprint 3 and did not stumble upon any spikes now.
 
 Almost all user stories had two sub-tasks: implementing the front end to give the user a nice interface and implementing the back-end by setting up the necessary routes.
 
