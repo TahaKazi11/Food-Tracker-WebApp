@@ -56,8 +56,10 @@ public class SearchRestaurantsByBuildingHandler implements HttpHandler {
         if(iterable.first() != null) {
             for (Document doc: iterable){
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("Restaurant", doc.get("Restaurant").toString());
-                jsonObject.put("Hours of Operation", doc.get("Hours of Operation").toString());
+                jsonObject.put("name", doc.get("Restaurant").toString());
+                jsonObject.put("hours", doc.get("Hours of Operation").toString());
+                jsonObject.put("location", doc.get("Building").toString());
+                jsonObject.put("image", "https://media.discordapp.net/attachments/666763770327990345/679081001019768849/Final_Logo.png?width=571&height=571");
                 jsonArray.put(jsonObject);
             }
             Utils.writeResponse(httpExchange, jsonArray.toString(), 200);

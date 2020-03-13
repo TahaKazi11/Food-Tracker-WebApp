@@ -7,9 +7,13 @@ import { MenuComponent } from './menu/menu.component';
 import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CartComponent } from './cart/cart.component';
+import { BuildingComponent } from './building/building.component';
+import { BuildingRestaurantComponent } from './building-restaurant/building-restaurant.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'building', component: BuildingComponent },
+  { path: 'building/:id', component: BuildingRestaurantComponent },
   { path: 'login', component: LoginComponent },
   { path: 'DailyDigest', component: DailyDigestComponent },
   { path: 'Menu/:id', component: MenuComponent },

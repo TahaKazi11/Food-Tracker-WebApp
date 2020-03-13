@@ -32,6 +32,8 @@ const urls = {
         ) => `${ apiBase() }/full-info/by-restaurant-id?name=${ restaurantId }`,
       byAccount: (userAccountId: string
         ) => `${ apiBase() }/restaurants/by-account-id/${ userAccountId }`,
+      byBuilding:(buildingId:string
+        ) => `${ apiBase() }/restaurants/by-building?name=${ buildingId }`,
       menuBySearch: (restrauntId: string, searchTerm: string
           ) => `${ apiBase() }/restaurants/menu/by-search?restrauntId=${ restrauntId }&searchTerm=${ searchTerm }`,
     },
@@ -49,6 +51,10 @@ export class ApiService {
 
     public static requestingRestaurant(restrauntId: string): Promise<Restaurant> {
       return this.requestingFromApiWithRetries<Restaurant>(urls.restaurants.full(restrauntId), 1); // TODO add try catch for handling a not found restraunt not found
+    }
+
+    public static requestingRestaurantByBuilding(buildingId: string) : Promise<Restaurant[]>{
+      return this.requestingFromApiWithRetries<Restaurant[]>(urls.restaurants.byBuilding(buildingId), 1);
     }
 
     public static requestingMenuFromRestaurant(restrauntId: string): Promise<RestaurantMenu> {
