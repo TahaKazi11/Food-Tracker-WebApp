@@ -91,7 +91,7 @@ public class GetFoodHandler {
         	response.put("Cost", doc.get("Cost").toString());
         	foodList.put(response);
         }
-        Utils.writeResponse(httpExchange, getFinalJSON(foodList).toString(), 200);
+        Utils.writeResponse(httpExchange, foodList.toString(), 200);
         return;
 
 		//MongoCursor<Document> mongoCursor = findIt.iterator();
