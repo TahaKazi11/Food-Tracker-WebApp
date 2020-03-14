@@ -25,10 +25,10 @@ public class SubtractFromBudgetHandler implements HttpHandler {
 
     public void handle(HttpExchange r) {
         try {
-            if (r.getRequestMethod().equals("PUT")) {
+            if (r.getRequestMethod().equals("POST")) {
                 handlePut(r);
             } else {
-                r.sendResponseHeaders(400, -1);
+                Utils.writeResponse(r, "", 400);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -39,11 +39,9 @@ public class SubtractFromBudgetHandler implements HttpHandler {
     //budget..Need to think about when budget would reset to original amount..I will send back an alert if their budget goes down
     private void handlePut(HttpExchange httpExchange) throws JSONException, IOException {
 
-        String body = Utils.convert(httpExchange.getRequestBody());
-        Document deserialized = new Document();
-        deserialized = deserialized.parse(body);
-        String id = deserialized.get("_id").toString();
-        String amount= deserialized.get("amount").toString(); //this is the amount I will receive
+        Map<String, String> queryParams = Utils.queryToMap(httpExchange.getRequestURI().getQuery());
+        String id = queryParams.get("_id");
+        String amount= queryParams.get("amount"); //this is the amount I will receive
         MongoDatabase database = this.mongoClient.getDatabase("UTMFoodTracker");
         MongoCollection<Document> collection = database.getCollection("Users");
         BasicDBObject query = new BasicDBObject();

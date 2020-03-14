@@ -15,6 +15,7 @@ export class CartComponent implements OnInit {
   public confMessage = '';
   public success: boolean;
   public showAlert: boolean;
+  public exceeded: boolean;
 
   constructor() { }
 
@@ -24,9 +25,8 @@ export class CartComponent implements OnInit {
     this.pushItemToCart({ id: '3', Name: 'Pan-Fried Beef Rice', Calories: 400, Price: 13.99, amount: 2 });
     this.pushItemToCart({ id: '4', Name: 'Secret Chicken with Rice', Calories: 500, Price: 13.88, amount: 3 });
     this.calTotalExpense(this.items);
-    this.success = true;
-    this.confMessage = 'Order confirmed successfully!';
     this.showAlert = false;
+    this.exceeded = false;
   }
 
   public pushItemToCart(data: MenuItem) {
@@ -64,12 +64,21 @@ export class CartComponent implements OnInit {
 
   public sendExpenseToApi() {
     this.showAlert = true;
-    try {
-      ApiService.deductExpense(this.accountId, this.getTotalExpense().toString());
-    } catch (error) {
-      this.confMessage = 'The request did not go through.';
+
+    ApiService.deductExpense(this.accountId, this.getTotalExpense().toPrecision(3))
+    .then((data) => {
+      this.success = true;
+      this.confMessage = 'Order confirmed successfully!';
+
+      if(data.exceeded.valueOf()) {
+        this.exceeded = true;
+      }
+
+    })
+    .catch((error) => {
       this.success = false;
-    }
+      this.confMessage = 'The request did not go through.';
+    });
   }
 
 
