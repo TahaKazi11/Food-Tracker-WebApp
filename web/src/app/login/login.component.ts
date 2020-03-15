@@ -8,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   images: string[];
-  email: string = '';
+  email = '';
+  password = '';
+  prompt = '';
 
   constructor() {
     this.images = [
@@ -26,5 +28,26 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  public validateEmail() {
+    const emailRe = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    if (this.email.match(emailRe)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  public validatePassword() {
+    const passwordRe = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+
+    if (this.password.match(passwordRe)) {
+      return true;
+    }
+
+    return false;
+  }
+
 
 }
