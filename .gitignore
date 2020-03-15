@@ -29,3 +29,5 @@ server/.idea/libraries/Maven__org_checkerframework_checker_compat_qual_2_5_5.xml
 server/.idea/libraries/Maven__org_codehaus_mojo_animal_sniffer_annotations_1_17.xml
 server/.idea/libraries/Maven__org_json_json_20090211.xml
 server/.idea/libraries/Maven__org_mongodb_mongo_java_driver_3_12_1.xml
+server/.classpath
+server/.settings/
