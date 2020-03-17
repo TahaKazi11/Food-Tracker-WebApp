@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { UserDataService } from 'src/app/user-data.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,18 +12,27 @@ export class UserProfileComponent implements OnInit {
   following: number = 0;
   post: number = 0;
   imgpath: string = '';
-  firstname: string = "Michael";
-  lastname: string = "Hammerson";
-  email: string = "michael.hammerson@mail.utoronto.ca";
-  phonenumber: string = "(647) 888-3802";
+  _id: string;
+  username: string;
+  email: string;
+  gender: string;
+  birth: string;
+  phone: string;
+  private: string;
+  budget: string;
 
-  constructor() { }
+  constructor(private data: UserDataService) { }
 
   ngOnInit() {
+    this.data.currentUser.subscribe((user) => {
+      this._id = user._id;
+      this.username = user.name;
+      this.email = user.email;
+      this.gender = user.gender;
+      this.birth = user.birth;
+      this.phone = user.phone;
+      this.private = user.private;
+      this.budget = user.budget;
+    });
   }
-
-  edit() {
-
-  }
-
 }

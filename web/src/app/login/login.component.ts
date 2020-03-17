@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api/api.service';
+import { UserDataService } from 'src/app/user-data.service';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +8,14 @@ import { ApiService } from '../../services/api/api.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
   images: string[];
   email = '';
   password = '';
-  prompt = '';
+  confMessage = '';
+  success: boolean;
+  showAlert: boolean;
 
-  constructor() {
+  constructor(private user: UserDataService) {
     this.images = [
       'lily-banse--YHSwy6uqvk-unsplash.jpg',
       'abhishek-sanwa-limbu-LR559Dcst70-unsplash.jpg',
@@ -25,6 +27,7 @@ export class LoginComponent implements OnInit {
       'monika-grabkowska-P1aohbiT-EY-unsplash.jpg',
       'brooke-lark-HlNcigvUi4Q-unsplash.jpg'
     ];
+    this.showAlert = false;
   }
 
   ngOnInit() {
@@ -50,5 +53,18 @@ export class LoginComponent implements OnInit {
     return false;
   }
 
+  public authenticate() {
+    ApiService.authenticateLogin(this.email, this.password)
+    .then((data) => {
+      this.user.changeUserAccount(data);
+      this.success = true;
+      this.confMessage = 'Login successful!';
+    })
+    .catch((error) => {
+      this.success = false;
+      this.confMessage = 'Either user does not exist or email and password don\'t match.';
+    });
 
+    this.showAlert = true;
+  }
 }

@@ -7,7 +7,7 @@ import { ApiErrorEmptyContent } from './errors/api.error.empty.content';
 import { ApiErrorEmptyResponse } from './errors/api.error.empty.response';
 import { ApiError } from './errors/api.error';
 import { Injectable } from '@angular/core';
-import { RestaurantList, RestaurantMenu, Restaurant, MenuItem, MenuSection, Deduction } from 'src/main';
+import { RestaurantList, RestaurantMenu, Restaurant, MenuItem, MenuSection, Deduction, User } from 'src/main';
 
 
 const apiBase = () => {
@@ -21,7 +21,9 @@ const urls = {
       settings: (userAccountId: string,
       ) => `${ apiBase() }/user/by-account-id/${ userAccountId }`,
       deductBudget: (userAccountId: string, totalExpense: string
-      ) => `${ apiBase() }/subtractFromBudget?_id=${ userAccountId }&amount=${ totalExpense }`
+      ) => `${ apiBase() }/subtractFromBudget?_id=${ userAccountId }&amount=${ totalExpense }`,
+      authenticate: (email: string, password: string
+      ) => `${ apiBase() }/api/login?email=${ email }&password=${ password }`
     },
     restaurants   : {
       menu: (restaurantId: string,
@@ -71,6 +73,10 @@ export class ApiService {
 
     public static deductExpense(userAccountId: string, totalExpense: string): Promise<Deduction> {
       return this.requestingFromAPI<Deduction>(urls.user.deductBudget(userAccountId, totalExpense), 'PUT'); // TODO add try catch for bad gateway
+    }
+
+    public static authenticateLogin(email: string, password: string): Promise<User> {
+      return this.requestingFromAPI<User>(urls.user.authenticate(email, password));
     }
 
     private static async requestingFromApiWithRetries<T>(path: string, maxRetries = 0, numRetry = 0): Promise<T> {
