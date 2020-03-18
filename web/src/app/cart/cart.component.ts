@@ -63,8 +63,6 @@ export class CartComponent implements OnInit {
   }
 
   public sendExpenseToApi() {
-    this.showAlert = true;
-
     ApiService.deductExpense(this.accountId, this.getTotalExpense().toPrecision(3))
     .then((data) => {
       this.success = true;
@@ -79,6 +77,8 @@ export class CartComponent implements OnInit {
       this.success = false;
       this.confMessage = 'The request did not go through.';
     });
+
+    this.showAlert = true;
   }
 
 
