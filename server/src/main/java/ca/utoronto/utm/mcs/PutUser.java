@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Map;
+
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.json.*;
@@ -31,7 +33,7 @@ public class PutUser implements HttpHandler{
 
     public void handle(HttpExchange r) throws IOException{
         try {
-            if (r.getRequestMethod().equals("PUT")) {
+            if (r.getRequestMethod().equals("POST")) {
                 this.handlePut(r);
             }
             else {
@@ -51,28 +53,28 @@ public class PutUser implements HttpHandler{
             
             MongoDatabase dbdata = this.mongoClient.getDatabase(DatabaseName); 
             MongoCollection collection = dbdata.getCollection(collectionName);
-    
-            String body = Utils.convert(r.getRequestBody());
-            JSONObject deserialized = new JSONObject(body);
-    
-            String result = "";
-            try{
-                if (deserialized.has("name")&&deserialized.has("email")&&deserialized.has("password")&&deserialized.has("birth")&&deserialized.has("phone")&&deserialized.has("gender")&&deserialized.has("private")){
-                        //the user information json format need to be determined
-                        Document userInfo = Document.parse( body );
-                        String encrString = Utils.passEncrypt(userInfo.get("password").toString());
-                        userInfo.put("password", encrString);
-                        userInfo.put("budget", "0");
-                        collection.insertOne(userInfo);
-                        ObjectId id = (ObjectId)userInfo.get( "_id" );
-                        System.out.println(id);
-                        r.sendResponseHeaders(200, id.toString().getBytes().length);
-                        OutputStream os = r.getResponseBody();
-                        os.write(id.toString().getBytes());
-                        os.close();
-                        }
 
-                else{
+            Map<String, String> queryParams = Utils.queryToMap(r.getRequestURI().getQuery());
+    
+            JSONObject result = new JSONObject();
+            try{
+                if (!queryParams.get("username").isEmpty() && !queryParams.get("email").isEmpty()
+                        && !queryParams.get("password").isEmpty() && !queryParams.get("birth").isEmpty()
+                        && !queryParams.get("phone").isEmpty() && !queryParams.get("gender").isEmpty()) {
+                    //the user information json format need to be determined
+                    Document userInfo = Document.parse(String.valueOf(queryParams));
+                    String encrString = Utils.passEncrypt(userInfo.get("password").toString());
+                    userInfo.put("password", encrString);
+                    userInfo.put("budget", "0");
+                    userInfo.put("private", "no");
+                    collection.insertOne(userInfo);
+                    ObjectId id = (ObjectId)userInfo.get( "_id" );
+                    System.out.println(id);
+                    r.sendResponseHeaders(200, id.toString().getBytes().length);
+                    OutputStream os = r.getResponseBody();
+                    os.write(id.toString().getBytes());
+                    os.close();
+                } else{
                     System.out.println("b");
                     r.sendResponseHeaders(400, -1);
                     return;

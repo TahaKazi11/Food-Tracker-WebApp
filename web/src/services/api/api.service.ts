@@ -23,7 +23,9 @@ const urls = {
       deductBudget: (userAccountId: string, totalExpense: string
       ) => `${ apiBase() }/subtractFromBudget?_id=${ userAccountId }&amount=${ totalExpense }`,
       authenticate: (email: string, password: string
-      ) => `${ apiBase() }/api/login?email=${ email }&password=${ password }`
+      ) => `${ apiBase() }/api/login?email=${ email }&password=${ password }`,
+      register: (username: string, email: string, phone: string, gender: string, birth: string, password: string
+      ) => `${ apiBase() }/api/addUser?username=${ username }&email=${ email }&phone=${ phone }&gender=${ gender }&birth=${ birth }&password=${ password }`
     },
     restaurants   : {
       menu: (restaurantId: string,
@@ -34,7 +36,7 @@ const urls = {
         ) => `${ apiBase() }/full-info/by-restaurant-id?name=${ restaurantId }`,
       byAccount: (userAccountId: string
         ) => `${ apiBase() }/restaurants/by-account-id/${ userAccountId }`,
-      byBuilding:(buildingId:string
+      byBuilding:(buildingId: string
         ) => `${ apiBase() }/restaurants/by-building?name=${ buildingId }`,
       menuBySearch: (restrauntId: string, searchTerm: string
           ) => `${ apiBase() }/restaurants/menu/by-search?restrauntId=${ restrauntId }&searchTerm=${ searchTerm }`,
@@ -72,11 +74,15 @@ export class ApiService {
     }
 
     public static deductExpense(userAccountId: string, totalExpense: string): Promise<Deduction> {
-      return this.requestingFromAPI<Deduction>(urls.user.deductBudget(userAccountId, totalExpense), 'PUT'); // TODO add try catch for bad gateway
+      return this.requestingFromAPI<Deduction>(urls.user.deductBudget(userAccountId, totalExpense), 'POST'); // TODO add try catch for bad gateway
     }
 
     public static authenticateLogin(email: string, password: string): Promise<User> {
       return this.requestingFromAPI<User>(urls.user.authenticate(email, password));
+    }
+
+    public static registerUser(username: string, email: string, phone: string, gender: string, birth: string, password: string): Promise<User> {
+      return this.requestingFromAPI<User>(urls.user.register(username, email, phone, gender, birth, password), 'POST');
     }
 
     private static async requestingFromApiWithRetries<T>(path: string, maxRetries = 0, numRetry = 0): Promise<T> {
@@ -111,7 +117,7 @@ export class ApiService {
             case 'GET':
               response = await this.axiosService.get(path);
               break;
-            case 'PUT':
+            case 'POST':
               response = await this.axiosService.post(path, config);
               break;
             }
