@@ -26,10 +26,11 @@ public class SetBudgetHandler implements HttpHandler{
 
     public void handle(HttpExchange httpExchange) {
         try {
-            if (httpExchange.getRequestMethod().equals("PUT")) {
+            if (httpExchange.getRequestMethod().equals("POST")) {
                 handlePut(httpExchange);
+            } else{
+                Utils.writeResponse(httpExchange, "", 400);
             }
-            else{ httpExchange.sendResponseHeaders(400,-1);}
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,12 +38,10 @@ public class SetBudgetHandler implements HttpHandler{
 
 
     private void handlePut(HttpExchange httpExchange) throws IOException{
+        Map<String, String> queryParams = Utils.queryToMap(httpExchange.getRequestURI().getQuery());
 
-        String body = Utils.convert(httpExchange.getRequestBody());
-        Document deserialized = new Document();
-        deserialized = deserialized.parse(body);
-        String id = deserialized.get("_id").toString();
-        String budget = deserialized.get("budget").toString();
+        String id = queryParams.get("_id");
+        String budget = queryParams.get("budget");
         MongoDatabase database = this.mongoClient.getDatabase("UTMFoodTracker");
         MongoCollection<Document> collection = database.getCollection("Users");
         BasicDBObject query = new BasicDBObject();
@@ -52,7 +51,7 @@ public class SetBudgetHandler implements HttpHandler{
             BasicDBObject updatedDocument = new BasicDBObject();
             updatedDocument.append("$set", new BasicDBObject().append("budget", budget));
             collection.findOneAndUpdate(iterable.first(), updatedDocument);
-            Utils.writeResponse(httpExchange, "", 200);
+            Utils.writeResponse(httpExchange, "success", 200);
         } else {
             Utils.writeResponse(httpExchange, "", 404);
         }

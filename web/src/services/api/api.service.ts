@@ -24,6 +24,10 @@ const urls = {
       ) => `${ apiBase() }/subtractFromBudget?_id=${ userAccountId }&amount=${ totalExpense }`,
       authenticate: (email: string, password: string
       ) => `${ apiBase() }/api/login?email=${ email }&password=${ password }`,
+      setBudget: (userAccountId: string, budget: string
+      ) => `${ apiBase() }/setBudget?_id=${ userAccountId }&budget=${ budget }`,
+      getProfile: (userAccountId: string
+      ) => `${ apiBase() }/api/getProfile?_id=${ userAccountId }`,
       register: (username: string, email: string, phone: string, gender: string, birth: string, password: string
       ) => `${ apiBase() }/api/addUser?username=${ username }&email=${ email }&phone=${ phone }&gender=${ gender }&birth=${ birth }&password=${ password }`
     },
@@ -79,6 +83,14 @@ export class ApiService {
 
     public static authenticateLogin(email: string, password: string): Promise<User> {
       return this.requestingFromAPI<User>(urls.user.authenticate(email, password));
+    }
+
+    public static editBudget(userAccountId: string, budget: string): Promise<any> {
+      return this.requestingFromAPI<any>(urls.user.setBudget(userAccountId, budget), 'POST');
+    }
+
+    public static getProfile(userAccountId: string): Promise<User> {
+      return this.requestingFromAPI<User>(urls.user.getProfile(userAccountId));
     }
 
     public static registerUser(username: string, email: string, phone: string, gender: string, birth: string, password: string): Promise<User> {

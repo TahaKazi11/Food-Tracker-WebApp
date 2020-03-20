@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { UserDataService } from 'src/app/user-data.service';
+import { ApiService } from '../../services/api/api.service';
+import Axios from 'axios';
+import { AxiosService } from 'src/services/api/axios.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,7 +14,6 @@ export class UserProfileComponent implements OnInit {
   follower: number = 0;
   following: number = 0;
   post: number = 0;
-  imgpath: string = '';
   _id: string;
   username: string;
   email: string;
@@ -20,6 +22,9 @@ export class UserProfileComponent implements OnInit {
   phone: string;
   private: string;
   budget: string;
+  newBudget: string;
+  editActive: boolean;
+  showAlert: boolean;
 
   constructor(private data: UserDataService) { }
 
@@ -34,5 +39,41 @@ export class UserProfileComponent implements OnInit {
       this.private = user.private;
       this.budget = user.budget;
     });
+
+    this.editActive = false;
+    this.showAlert = false;
+    this.newBudget = '';
+  }
+
+  public enableEdit() {
+    if (this._id == null) {
+      this.showAlert = true;
+    } else {
+      this.editActive = true;
+    }
+  }
+
+
+  public validateBudget() {
+    const budgetRe = /^[0-9]+$/;
+
+    if (this.newBudget.match(budgetRe)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  public editBudget() {
+    ApiService.editBudget(this._id, this.newBudget)
+    .then((data) => {
+    });
+
+    ApiService.getProfile(this._id)
+    .then((user) => {
+      this.data.changeUserAccount(user);
+    });
+
+    this.ngOnInit();
   }
 }

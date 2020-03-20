@@ -73,9 +73,14 @@ export class CartComponent implements OnInit {
       .then((data) => {
         this.success = true;
         this.confMessage = 'Order confirmed successfully!';
-        if (data.exceeded.valueOf()) {
+        if (data.exceeded.valueOf() === true) {
           this.exceeded = true;
         }
+
+        ApiService.getProfile(this.accountId)
+        .then((user) => {
+          this.data.changeUserAccount(user);
+        });
       })
       .catch((error) => {
         this.success = false;
