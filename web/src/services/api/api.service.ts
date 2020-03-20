@@ -92,11 +92,7 @@ export class ApiService {
     public static getProfile(userAccountId: string): Promise<User> {
       return this.requestingFromAPI<User>(urls.user.getProfile(userAccountId));
     }
-<<<<<<< HEAD
 
-=======
-      
->>>>>>> 43d5ef97363556275abd3804018ee2a05104e985
     public static registerUser(username: string, email: string, phone: string, gender: string, birth: string, password: string): Promise<User> {
       return this.requestingFromAPI<User>(urls.user.register(username, email, phone, gender, birth, password), 'POST');
     }
