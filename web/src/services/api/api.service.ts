@@ -113,7 +113,7 @@ export class ApiService {
         let header: T;
 
         try {
-          switch(type) {
+          switch (type) {
             case 'GET':
               response = await this.axiosService.get(path);
               break;

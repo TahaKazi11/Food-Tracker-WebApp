@@ -62,25 +62,28 @@ public class PutUser implements HttpHandler{
                         && !queryParams.get("password").isEmpty() && !queryParams.get("birth").isEmpty()
                         && !queryParams.get("phone").isEmpty() && !queryParams.get("gender").isEmpty()) {
                     //the user information json format need to be determined
-                    Document userInfo = Document.parse(String.valueOf(queryParams));
+                    JSONObject requestBody = new JSONObject();
+                    requestBody.put("name", queryParams.get("username"));
+                    requestBody.put("email", queryParams.get("email"));
+                    requestBody.put("password", queryParams.get("password"));
+                    requestBody.put("birth", queryParams.get("birth"));
+                    requestBody.put("gender", queryParams.get("gender"));
+                    requestBody.put("phone", queryParams.get("phone"));
+                    Document userInfo = Document.parse(requestBody.toString());
                     String encrString = Utils.passEncrypt(userInfo.get("password").toString());
                     userInfo.put("password", encrString);
                     userInfo.put("budget", "0");
                     userInfo.put("private", "no");
                     collection.insertOne(userInfo);
                     ObjectId id = (ObjectId)userInfo.get( "_id" );
-                    System.out.println(id);
-                    r.sendResponseHeaders(200, id.toString().getBytes().length);
-                    OutputStream os = r.getResponseBody();
-                    os.write(id.toString().getBytes());
-                    os.close();
+                    result.put("_id", id.toString());
+                    Utils.writeResponse(r, result.toString(), 200);
                 } else{
-                    System.out.println("b");
-                    r.sendResponseHeaders(400, -1);
+                    Utils.writeResponse(r, "", 400);
                     return;
                 }
-            }catch (Exception e){
-                r.sendResponseHeaders(500, -1);
+            } catch (Exception e){
+                Utils.writeResponse(r, "", 500);
                 return;
                 }
             }

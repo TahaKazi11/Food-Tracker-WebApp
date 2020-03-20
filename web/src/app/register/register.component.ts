@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../services/api/api.service';
 
 @Component({
   selector: 'app-register',
@@ -13,10 +14,14 @@ export class RegisterComponent implements OnInit {
   birth = '';
   password = '';
   confPassword = '';
+  success: boolean;
+  showAlert: boolean;
+  confMessage: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.showAlert = false;
   }
 
   public validateUsername() {
@@ -93,7 +98,17 @@ export class RegisterComponent implements OnInit {
   }
 
   public registerUser() {
-
+    ApiService.registerUser(this.username, this.email, this.phone, this.gender, this.birth, this.password)
+    .then((data) => {
+      this.showAlert = true;
+      this.success = true;
+      this.confMessage = 'You have successfully registered! You can now login.';
+    })
+    .catch((error) => {
+      this.showAlert = true;
+      this.success = false;
+      this.confMessage = 'Your request didn\'t go through.';
+    });
   }
 
 }
