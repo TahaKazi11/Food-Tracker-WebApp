@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'src/main';
+import { MenuItem, User } from 'src/main';
 import { ApiService } from '../../services/api/api.service';
+import { UserDataService } from '../user-data.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,13 +12,13 @@ export class CartComponent implements OnInit {
 
   public items: Array<MenuItem> = [];
   public priceTotal = 0;
-  private accountId = '5e69a888f1d54f6852d380b0';
+  private accountId: string;
   public confMessage = '';
   public success: boolean;
   public showAlert: boolean;
   public exceeded: boolean;
 
-  constructor() { }
+  constructor(private data: UserDataService) { }
 
   ngOnInit() {
     this.pushItemToCart({ id: '1', Name: 'Cheddar Bacon Uncle Burger Combo', Calories: 350, Price: 5.5, amount: 3 });
@@ -27,6 +28,7 @@ export class CartComponent implements OnInit {
     this.calTotalExpense(this.items);
     this.showAlert = false;
     this.exceeded = false;
+    this.data.currentUser.subscribe(user => this.accountId = user._id);
   }
 
   public pushItemToCart(data: MenuItem) {
@@ -63,20 +65,23 @@ export class CartComponent implements OnInit {
   }
 
   public sendExpenseToApi() {
-    ApiService.deductExpense(this.accountId, this.getTotalExpense().toPrecision(3))
-    .then((data) => {
-      this.success = true;
-      this.confMessage = 'Order confirmed successfully!';
-
-      if(data.exceeded.valueOf()) {
-        this.exceeded = true;
-      }
-
-    })
-    .catch((error) => {
+    if (this.accountId == null) {
       this.success = false;
-      this.confMessage = 'The request did not go through.';
-    });
+      this.confMessage = 'User not logged in, please login first.';
+    } else {
+      ApiService.deductExpense(this.accountId, this.getTotalExpense().toPrecision(3))
+      .then((data) => {
+        this.success = true;
+        this.confMessage = 'Order confirmed successfully!';
+        if (data.exceeded.valueOf()) {
+          this.exceeded = true;
+        }
+      })
+      .catch((error) => {
+        this.success = false;
+        this.confMessage = 'The request did not go through.';
+      });
+    }
 
     this.showAlert = true;
   }
