@@ -27,7 +27,7 @@ const urls = {
       setBudget: (userAccountId: string, budget: string
       ) => `${ apiBase() }/setBudget?_id=${ userAccountId }&budget=${ budget }`,
       getProfile: (userAccountId: string
-      ) => `${ apiBase() }/api/getProfile?_id=${ userAccountId }`
+      ) => `${ apiBase() }/api/getProfile?_id=${ userAccountId }`,
       register: (username: string, email: string, phone: string, gender: string, birth: string, password: string
       ) => `${ apiBase() }/api/addUser?username=${ username }&email=${ email }&phone=${ phone }&gender=${ gender }&birth=${ birth }&password=${ password }`
     },
