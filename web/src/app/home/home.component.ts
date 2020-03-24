@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './../../services/api/api.service';
-import { RestaurantList, RestaurantMenu, Restaurant, MenuItem, MenuSection } from 'src/main';
+import { RestaurantList, RestaurantMenu, Restaurant, MenuItem, MenuSection} from 'src/main';
 
 @Component({
   selector: 'app-home',

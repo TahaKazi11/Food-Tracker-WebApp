@@ -1,8 +1,14 @@
 .card-image {
     max-width: 64px;
     max-height: 64px;
+    min-width: 64px;
+    min-height: 64px;
 }
 
 .card-img-top {
     width: 20%;
+}
+
+.card-text {
+    width: 300px;
 }

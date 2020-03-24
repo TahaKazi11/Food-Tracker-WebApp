@@ -15,6 +15,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CartComponent } from './cart/cart.component';
 import { BuildingComponent } from './building/building.component';
 import { BuildingRestaurantComponent } from './building-restaurant/building-restaurant.component';
+import { TitleComponent } from './title/title.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { BuildingRestaurantComponent } from './building-restaurant/building-rest
     UserProfileComponent,
     CartComponent,
     BuildingComponent,
-    BuildingRestaurantComponent
+    BuildingRestaurantComponent,
+    TitleComponent
   ],
   imports: [
     BrowserModule,
