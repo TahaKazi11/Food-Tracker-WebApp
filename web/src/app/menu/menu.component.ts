@@ -29,11 +29,28 @@ export class MenuComponent implements OnInit {
     this.menu = [];
     const restaurant = await ApiService.requestingMenuFromRestaurant(this.restaurantName);
     this.menu = restaurant.menu;
-    console.log(this.menu);
   }
 
   public async onSearchSubmission() {
-    this.menu = await ApiService.searchingMenuList(this.restaurantName, this.searchTerm);
+    if(this.searchTerm === '') {
+      this.createMenu();
+    } else  {
+      this.searchByName();
+    }
+
+  }
+
+  public async searchByName() {
+    let menuItems = []
+    for(let i =0; i < this.menu.length; i++) {
+      menuItems = []
+      for(let x = 0; x < this.menu[i].dishes.length; x++) {
+        if(this.menu[i].dishes[x].Name.includes(this.searchTerm)) {
+          menuItems.push(this.menu[i].dishes[x]);
+        }
+      }
+      this.menu[i].dishes = menuItems;
+    }
   }
 
   public onAddToCard(name: string, calories: string, price: string) {
