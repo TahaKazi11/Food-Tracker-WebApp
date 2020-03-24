@@ -1,7 +1,11 @@
-<div *ngFor="let building of buildingList">
-    <div class="card mb-4" routerLink='/building/{{building}}'>
-        <div class="card-body">
-            <h4 class="card-title">{{building}}</h4>
+<app-title subtitle="Buildings"></app-title>
+<div class="card-group">
+    <div *ngFor="let building of buildingList">
+        <div class="card mb-4" routerLink='/building/{{building}}'>
+            <div class="card-body">
+                <h4 class="card-title">{{building}}</h4>
+            </div>
         </div>
     </div>
 </div>
+

@@ -8,29 +8,4 @@
 
 body { background: #9cb8b3; }
 
-h1 {
-    font: 600 1.5em/1 'Raleway', sans-serif;
-    color: rgba(0,0,0,.5);
-    top: 25%;
-    width: 100%;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: .5em;
-    position: relative;
 
-}
-
-span, span:after {
-    letter-spacing: .1em;
-    padding: .2em 0 .25em 0;
-    font-weight: 800;
-    color: #333;
-    white-space: nowrap;
-    display: inline-block;
-    position: relative;
-}
-
-span {
-    font-size: 5vw;
-    text-shadow: .04em .04em 0 rgb(97, 97, 97);
-}

@@ -1,9 +1,5 @@
 <div class="content">
-    <h1>
-        <br> <span data-shadow-text="UTM Food Tracker">UTM Food Tracker</span><br> 
-        Restraunts
-    </h1>
-    
+    <app-title subtitle="restraunts"></app-title>
     <div class="card-group">
         <app-restaurant-summary *ngFor="let restraunt of restrauntList" [restaurant]="restraunt"></app-restaurant-summary>
     </div>
