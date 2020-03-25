@@ -10,6 +10,14 @@
     </div>
 </div>
 
+<div class="buttons">
+  <button (click)="onTagSearchVege()" type="button">Vege</button>
+  <button (click)="onTagSearchHalal()" type="button">Halal</button>
+  <button (click)="onTagSearchMeat()" type="button">Meat</button>
+  <button (click)="onTagSearchDrinks()" type="button">Drinks</button>
+  <button (click)="onTagSearchResume()" type="button">Resume</button>
+</div>
+
 <div class="menu">
     <div *ngFor = "let section of menu">
         <h1>{{section.tag}}</h1>
@@ -26,6 +34,6 @@
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>
     </div>
 </div>
