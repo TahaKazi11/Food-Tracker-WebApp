@@ -25,6 +25,8 @@ export interface MenuSection {
 }
 
 export interface MenuItem {
+  // tslint:disable-next-line:ban-types
+  'Tag': String[];
   'id': string; // uniquely identifies menu item
   'Name': string;
   'Calories': number;

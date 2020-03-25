@@ -13,7 +13,7 @@ export class MenuComponent implements OnInit {
   public restaurantName = '';
   public searchTerm = '';
   public hasData = false;
-
+  public  searchTag = '';
   public menu: MenuSection[];
 
   constructor(private router: Router) { }
@@ -29,7 +29,16 @@ export class MenuComponent implements OnInit {
     this.menu = [];
     const restaurant = await ApiService.requestingMenuFromRestaurant(this.restaurantName);
     this.menu = restaurant.menu;
-  }
+
+    // console.log(this.menu);
+    // for(let i =0; i < this.menu.length; i++) {
+    //   for(let x = 0; x < this.menu[i].dishes.length; x++) {
+    //     // if(this.menu[i].dishes[x].Name.includes(this.searchTerm)) {
+    //      console.log(this.menu[i].dishes[x].Tag);
+    //     //}
+    //   }
+  // }
+}
 
   public async onSearchSubmission() {
     if(this.searchTerm === '') {
@@ -58,4 +67,49 @@ export class MenuComponent implements OnInit {
     console.log(name, calories, price);
   }
 
+  onTagSearchVege() {
+    console.log('Vege');
+    this.searchTag = 'Vege';
+
+    this.searchByTag();
+  }
+
+  public async searchByTag() {
+    let menuItems = []
+    for(let i =0; i < this.menu.length; i++) {
+      menuItems = []
+      for (let x = 0; x < this.menu[i].dishes.length; x++) {
+        //console.log(this.menu[i].dishes[x]);
+        for (let n = 0; n < this.menu[i].dishes[x].Tag.length; n ++) {
+          if (this.menu[i].dishes[x].Tag[n].includes(this.searchTag)) {
+            //console.log(this.menu[i].dishes[x].Tag.length;;
+            menuItems.push(this.menu[i].dishes[x]);
+          }
+          //console.log(this.menu[i].dishes[x].Tag[n]);
+        }
+      }
+      this.menu[i].dishes = menuItems;
+    }
+  }
+  onTagSearchHalal() {
+    console.log('Halal');
+    this.searchTag = 'Halal';
+    this.searchByTag();
+  }
+
+  onTagSearchMeat() {
+    console.log('Meat');
+    this.searchTag = 'Meat';
+    this.searchByTag();
+  }
+
+  onTagSearchDrinks() {
+    console.log('Drinks');
+    this.searchTag = 'Drinks';
+    this.searchByTag();
+  }
+
+  onTagSearchResume() {
+    this.createMenu();
+  }
 }
