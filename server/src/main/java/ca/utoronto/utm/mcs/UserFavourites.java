@@ -1,6 +1,7 @@
 package ca.utoronto.utm.mcs;
 import ca.utoronto.utm.mcs.Utility.Utils;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -30,13 +31,16 @@ public class UserFavourites implements HttpHandler{
     {
         try {
             if (r.getRequestMethod().equals("GET")) {
+                System.out.println("a");
                 this.handleGet(r);
             }
-            if (r.getRequestMethod().equals("PUT")) {
+            else if (r.getRequestMethod().equals("PUT")) {
+                System.out.println("b");
                 this.handlePut(r);
             }
             else {
-                r.sendResponseHeaders(400, -1);
+                System.out.println("c");
+                Utils.writeResponse(r, "", 400);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,36 +55,34 @@ public class UserFavourites implements HttpHandler{
         MongoDatabase dbdata = this.mongoClient.getDatabase(DatabaseName); 
         MongoCollection collection = dbdata.getCollection(collectionName);
 
-        String body = Utils.convert(r.getRequestBody());
-        JSONObject deserialized = new JSONObject(body);
+        // String body = Utils.convert(r.getRequestBody());
+        // JSONObject deserialized = new JSONObject(body);
+        Map<String, String> queryParams = Utils.queryToMap(r.getRequestURI().getQuery());
 
-        String result = "";
+        JSONObject result = new JSONObject();
         Document preresult = new Document();
         Object favlist = new Object();
         try{
-                if (deserialized.has("_id")){
-                    String value = deserialized.get("_id").toString();
-                    FindIterable<Document> findIterable = collection.find(Filters.eq("_id", new ObjectId(value)));
-                    MongoCursor<Document> dbCursor = findIterable.iterator();
-                    if(dbCursor.hasNext()){
-                        preresult = dbCursor.next();
-                        favlist = preresult.get("fav");
-                        result = favlist.toString();
-                    }else{
-                        r.sendResponseHeaders(404, -1);
-                        return;
-                    }
-                    r.sendResponseHeaders(200, result.getBytes().length);
-                    OutputStream os = r.getResponseBody();
-                    os.write(result.getBytes());
-                    os.close();
-                    }
+            if (!queryParams.get("_id").isEmpty()){
+                String value = queryParams.get("_id");
+                FindIterable<Document> findIterable = collection.find(Filters.eq("_id", new ObjectId(value)));
+                MongoCursor<Document> dbCursor = findIterable.iterator();
+                if(dbCursor.hasNext()){
+                    preresult = dbCursor.next();
+                    favlist = preresult.get("fav");
+                    result.put("fav", favlist);
+                }else{
+                    Utils.writeResponse(r, "", 404);
+                    return;
+                }
+                Utils.writeResponse(r, result.toString(), 200);
+                }
             else{
-                r.sendResponseHeaders(400, -1);
+                Utils.writeResponse(r, "", 400);
                 return;
             }
         }catch (Exception e){
-            r.sendResponseHeaders(500, -1);
+            Utils.writeResponse(r, "", 500);
             return;
             }
         }
@@ -92,37 +94,35 @@ public class UserFavourites implements HttpHandler{
             MongoDatabase dbdata = this.mongoClient.getDatabase(DatabaseName); 
             MongoCollection collection = dbdata.getCollection(collectionName);
     
-            String body = Utils.convert(r.getRequestBody());
-            JSONObject deserialized = new JSONObject(body);
-    
-            String result = "";
+            Map<String, String> queryParams = Utils.queryToMap(r.getRequestURI().getQuery());
+
+            JSONObject result = new JSONObject();
             Document preresult = new Document();
             Object favlist = new Object();
             try{
-                    if (deserialized.has("_id")){
-                        String value = deserialized.get("_id").toString();
-                        FindIterable<Document> findIterable = collection.find(Filters.eq("_id", new ObjectId(value)));
-                        MongoCursor<Document> dbCursor = findIterable.iterator();
-                        if(dbCursor.hasNext()){
-                            // todo
-                            preresult = dbCursor.next();
-                            favlist = preresult.get("fav");
-                            result = favlist.toString();
-                        }else{
-                            r.sendResponseHeaders(404, -1);
-                            return;
-                        }
-                        r.sendResponseHeaders(200, result.getBytes().length);
-                        OutputStream os = r.getResponseBody();
-                        os.write(result.getBytes());
-                        os.close();
-                        }
+                if (!queryParams.get("_id").isEmpty()){
+                    String value = queryParams.get("_id");
+                    FindIterable<Document> findIterable = collection.find(Filters.eq("_id", new ObjectId(value)));
+                    MongoCursor<Document> dbCursor = findIterable.iterator();
+                    if(dbCursor.hasNext()){
+                        preresult = dbCursor.next();
+                        favlist = preresult.get("fav");
+                        result.put("fav", favlist);
+                                    BasicDBObject updatedDocument = new BasicDBObject();
+            updatedDocument.append("$set", new BasicDBObject().append("budget", budget));
+            collection.findOneAndUpdate(iterable.first(), updatedDocument);
+                    }else{
+                        Utils.writeResponse(r, "", 404);
+                        return;
+                    }
+                    Utils.writeResponse(r, result.toString(), 200);
+                    }
                 else{
-                    r.sendResponseHeaders(400, -1);
+                    Utils.writeResponse(r, "", 400);
                     return;
                 }
             }catch (Exception e){
-                r.sendResponseHeaders(500, -1);
+                Utils.writeResponse(r, "", 500);
                 return;
                 }
             

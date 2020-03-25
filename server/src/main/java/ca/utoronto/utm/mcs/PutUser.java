@@ -63,6 +63,7 @@ public class PutUser implements HttpHandler{
                         && !queryParams.get("phone").isEmpty() && !queryParams.get("gender").isEmpty()) {
                     //the user information json format need to be determined
                     JSONObject requestBody = new JSONObject();
+                    ArrayList<String> favlist = new ArrayList<>();
                     requestBody.put("name", queryParams.get("username"));
                     requestBody.put("email", queryParams.get("email"));
                     requestBody.put("password", queryParams.get("password"));
@@ -74,6 +75,7 @@ public class PutUser implements HttpHandler{
                     userInfo.put("password", encrString);
                     userInfo.put("budget", "0");
                     userInfo.put("private", "no");
+                    userInfo.put("fav", favlist);
                     collection.insertOne(userInfo);
                     ObjectId id = (ObjectId)userInfo.get( "_id" );
                     result.put("_id", id.toString());
