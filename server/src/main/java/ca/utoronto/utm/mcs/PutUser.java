@@ -12,6 +12,8 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.json.*;
 
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
@@ -64,6 +66,12 @@ public class PutUser implements HttpHandler{
                     //the user information json format need to be determined
                     JSONObject requestBody = new JSONObject();
                     ArrayList<String> favlist = new ArrayList<>();
+                    FindIterable<Document> iterable = collection.find(Filters.eq("email", queryParams.get("email")));
+                    if(iterable.first() != null) {
+                        Utils.writeResponse(r, "User Found", 400);
+                        return;
+                    }
+
                     requestBody.put("name", queryParams.get("username"));
                     requestBody.put("email", queryParams.get("email"));
                     requestBody.put("password", queryParams.get("password"));
