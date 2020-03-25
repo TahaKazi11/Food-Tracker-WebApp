@@ -31,6 +31,4 @@ export class AxiosService {
     public put(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
         return axios.put(url, config);
     }
-
-
 }

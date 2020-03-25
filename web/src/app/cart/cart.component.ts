@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'src/main';
+import { MenuItem, User } from 'src/main';
 import { ApiService } from '../../services/api/api.service';
+import { UserDataService } from '../user-data.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,12 +12,13 @@ export class CartComponent implements OnInit {
 
   public items: Array<MenuItem> = [];
   public priceTotal = 0;
-  private accountId = '5e69a888f1d54f6852d380b0';
+  private accountId: string;
   public confMessage = '';
   public success: boolean;
   public showAlert: boolean;
+  public exceeded: boolean;
 
-  constructor() { }
+  constructor(private data: UserDataService) { }
 
   ngOnInit() {
     this.pushItemToCart({ id: '1', Name: 'Cheddar Bacon Uncle Burger Combo', Calories: 350, Price: 5.5, amount: 3 });
@@ -24,9 +26,9 @@ export class CartComponent implements OnInit {
     this.pushItemToCart({ id: '3', Name: 'Pan-Fried Beef Rice', Calories: 400, Price: 13.99, amount: 2 });
     this.pushItemToCart({ id: '4', Name: 'Secret Chicken with Rice', Calories: 500, Price: 13.88, amount: 3 });
     this.calTotalExpense(this.items);
-    this.success = true;
-    this.confMessage = 'Order confirmed successfully!';
     this.showAlert = false;
+    this.exceeded = false;
+    this.data.currentUser.subscribe(user => this.accountId = user._id);
   }
 
   public pushItemToCart(data: MenuItem) {
@@ -63,13 +65,30 @@ export class CartComponent implements OnInit {
   }
 
   public sendExpenseToApi() {
-    this.showAlert = true;
-    try {
-      ApiService.deductExpense(this.accountId, this.getTotalExpense().toString());
-    } catch (error) {
-      this.confMessage = 'The request did not go through.';
+    if (this.accountId == null) {
       this.success = false;
+      this.confMessage = 'User not logged in, please login first.';
+    } else {
+      ApiService.deductExpense(this.accountId, this.getTotalExpense().toPrecision(3))
+      .then((data) => {
+        this.success = true;
+        this.confMessage = 'Order confirmed successfully!';
+        if (data.exceeded.valueOf() === true) {
+          this.exceeded = true;
+        }
+
+        ApiService.getProfile(this.accountId)
+        .then((user) => {
+          this.data.changeUserAccount(user);
+        });
+      })
+      .catch((error) => {
+        this.success = false;
+        this.confMessage = 'The request did not go through.';
+      });
     }
+
+    this.showAlert = true;
   }
 
 
