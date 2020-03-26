@@ -51,7 +51,9 @@ export interface User {
   'phone': string;
   'private': string;
   'budget': string;
+  'fav': string[];
 }
+
 
 export interface Deduction {
   'exceeded': boolean;

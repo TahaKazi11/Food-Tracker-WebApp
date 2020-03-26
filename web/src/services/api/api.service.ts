@@ -30,6 +30,9 @@ const urls = {
       ) => `${ apiBase() }/api/getProfile?_id=${ userAccountId }`,
       register: (username: string, email: string, phone: string, gender: string, birth: string, password: string
       ) => `${ apiBase() }/api/addUser?username=${ username }&email=${ email }&phone=${ phone }&gender=${ gender }&birth=${ birth }&password=${ password }`
+      ,
+      likefood: (userAccountId: string, food: string
+      ) => `${ apiBase() }/api/Fav?_id=${ userAccountId }&fid=${food}`
     },
     restaurants   : {
       menu: (restaurantId: string,
@@ -96,6 +99,11 @@ export class ApiService {
     public static registerUser(username: string, email: string, phone: string, gender: string, birth: string, password: string): Promise<User> {
       return this.requestingFromAPI<User>(urls.user.register(username, email, phone, gender, birth, password), 'POST');
     }
+
+    public static putLikeFood(userAccountId: string, food: string): Promise<User> {
+      return this.requestingFromAPI<User>(urls.user.likefood(userAccountId, food), 'POST');
+    }
+
 
     private static async requestingFromApiWithRetries<T>(path: string, maxRetries = 0, numRetry = 0): Promise<T> {
       try {

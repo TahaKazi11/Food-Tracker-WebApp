@@ -25,6 +25,8 @@ export class UserProfileComponent implements OnInit {
   newBudget: string;
   editActive: boolean;
   showAlert: boolean;
+  favList: string[];
+  listTxt: string = '';
 
   constructor(private data: UserDataService) { }
 
@@ -38,6 +40,8 @@ export class UserProfileComponent implements OnInit {
       this.phone = user.phone;
       this.private = user.private;
       this.budget = user.budget;
+      this.favList = user.fav;
+      this.listTxt = this.favList.toString();
     });
 
     this.editActive = false;
@@ -64,6 +68,7 @@ export class UserProfileComponent implements OnInit {
     return false;
   }
 
+
   public editBudget() {
     ApiService.editBudget(this._id, this.newBudget)
     .then((data) => {
@@ -75,5 +80,14 @@ export class UserProfileComponent implements OnInit {
     });
 
     this.ngOnInit();
+  }
+
+  refreshFav() {
+    ApiService.getProfile(this._id)
+      .then((user) => {
+        this.data.changeUserAccount(user);
+      });
+    this.ngOnInit();
+    document.getElementById('Fav').innerHTML = 'Liked: ' + this.favList.toString();
   }
 }
