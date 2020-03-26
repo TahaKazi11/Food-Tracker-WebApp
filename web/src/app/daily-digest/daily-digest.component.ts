@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api/api.service';
 import { UserDataService } from '../user-data.service';
-import { formatDate } from '@angular/common';
-import { History } from 'src/main';
-import { stringify } from 'querystring';
+import { ApiService } from 'src/services/api/api.service';
 
 @Component({
   selector: 'app-daily-digest',
@@ -12,40 +9,26 @@ import { stringify } from 'querystring';
 })
 export class DailyDigestComponent implements OnInit {
   public userId: string;
-  public dates: string[];
-  public logged_in = true ;
-  public now: Date = new Date();
-  public historys:History[];
-  constructor(private data: UserDataService) { }
+  public logged_in = false;
+  public history:Object[];
+  constructor(private user: UserDataService) { }
 
   ngOnInit() {
-    this.data.currentUser.subscribe(user => this.userId = user._id);
+    this.userId = this.user.getUserId();
     if (this.userId){
       this.logged_in = true;
+      this.loadDailyIntake();
     }
-    this.dates = [];
-    this.historys = [];
-    this.get_recent_7_days();
-    console.log(this.dates);
-    for (var i=0;i<7;i++){
-      this.historys.push(this.mockHistory(this.dates[i]));
-    }
-    console.log(this.historys);
   }
   
-  public get_recent_7_days(){
-    for (var i=0; i<7;i++){
-      var d = new Date();
-      d.setDate(d.getDate() - i)
-      this.dates.push(formatDate(d,'yyyyMMdd','en-US'));
-    }
-  }
-
-  public mockHistory(date : string):History{
-    const history ={
-      cost: 100,
-      date: date
-    }as History
-    return history;
+  private async loadDailyIntake(){
+    ApiService.getDailyIntake(this.userId)
+    .then((data)=>{
+      if(!data) {
+        this.history = {} as Object[];
+      } else {
+        this.history = Object(data);
+      }
+    })
   }
 }

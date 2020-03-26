@@ -1,12 +1,17 @@
 <app-title subtitle="Daily Digest"></app-title>
+<div *ngIf="logged_in; else notLoggedIn">
   <div class="row mb-4">
-    <div *ngFor = "let history of historys">
+    <div *ngFor = "let Item of history">
       <div class="card h-100">
         <img src="https://media.discordapp.net/attachments/666763770327990345/679081001019768849/Final_Logo.png?width=571&height=571" class="card-img-top" alt="Card image cap">
         <div class="card-body">
-        <h5 class="card-title">{{history.date.substr(0,4)}} / {{history.date.substr(4,2)}} / {{history.date.substr(6)}}</h5>
-        <p class="card-text">{{history.cost}}</p>
+        <p class="card-text">{{Item.tag}}</p>
+        <p class="card-text">{{Item.name}}</p>
+        </div>
       </div>
-    </div>  
     </div>
+  </div>
 </div>
+<ng-template #notLoggedIn>
+  Please Log in for this feature
+</ng-template>

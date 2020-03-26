@@ -18,13 +18,13 @@ export class BuildingRestaurantComponent implements OnInit {
     this.url = this.router.url;
     this.buildingName = decodeURIComponent(this.url.split('/')[2]);
     console.log(this.buildingName);
-    this.loadRestaurant()
+    this.loadRestaurant();
   }
 
   private async loadRestaurant(){
-    this.restaurants = []
+    this.restaurants = [];
     this.restaurants = await ApiService.requestingRestaurantByBuilding(this.buildingName);
-    console.log(this.restaurants)
+    console.log(this.restaurants);
   }
 
 }

@@ -3,12 +3,7 @@ package ca.utoronto.utm.mcs;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
-import ca.utoronto.utm.mcs.Handlers.GetMenuHandler;
-import ca.utoronto.utm.mcs.Handlers.GetRestaurantsHandler;
-import ca.utoronto.utm.mcs.Handlers.GetRestaurantHandler;
-import ca.utoronto.utm.mcs.Handlers.SetBudgetHandler;
-import ca.utoronto.utm.mcs.Handlers.SubtractFromBudgetHandler;
-import ca.utoronto.utm.mcs.Handlers.SearchRestaurantsByBuildingHandler;
+import ca.utoronto.utm.mcs.Handlers.*;
 import com.mongodb.*;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
@@ -35,6 +30,9 @@ public class App
         server.createContext("/subtractFromBudget", new SubtractFromBudgetHandler(connection));
         server.createContext("/restaurants/by-building", new SearchRestaurantsByBuildingHandler(connection));
         server.createContext("/api/Fav", new UserFavourites(connection));
+        server.createContext("/api/addDailyIntake", new addDailyIntakeHandler(connection));
+        server.createContext("/api/getDailyIntake", new getDailyIntakeHandler(connection));
+
         server.start();
         System.out.printf("Server started on port %d...\n", PORT);
 
