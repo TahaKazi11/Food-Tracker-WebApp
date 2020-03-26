@@ -100,8 +100,8 @@ export class ApiService {
       return this.requestingFromAPI<User>(urls.user.register(username, email, phone, gender, birth, password), 'POST');
     }
 
-    public static likefood(userAccountId: string, food: string): Promise<User> {
-      return this.requestingFromAPI<User>(urls.user.likefood(userAccountId, food));
+    public static putLikeFood(userAccountId: string, food: string): Promise<User> {
+      return this.requestingFromAPI<User>(urls.user.likefood(userAccountId, food), 'POST');
     }
 
 

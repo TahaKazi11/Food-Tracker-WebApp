@@ -41,7 +41,7 @@ public class UserFavourites implements HttpHandler{
                 System.out.println("a");
                 this.handleGet(r);
             }
-            else if (r.getRequestMethod().equals("PUT")) {
+            else if (r.getRequestMethod().equals("POST")) {
                 System.out.println("b");
                 this.handlePut(r);
             }
@@ -77,7 +77,7 @@ public class UserFavourites implements HttpHandler{
                 if(dbCursor.hasNext()){
                     preresult = dbCursor.next();
                     favlist = preresult.get("fav");
-                    result.put("_id", value);
+                    //result.put("_id", value);
                     result.put("fav", favlist);
                 }else{
                     Utils.writeResponse(r, "", 404);

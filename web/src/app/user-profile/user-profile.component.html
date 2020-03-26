@@ -58,4 +58,10 @@
       <button (click)='editBudget()' type="submit" class="btn btn-outline-primary mt-3" [disabled]='!validateBudget()'>Confirm</button>
     </div>
   </div>
+  <div class="Fav">
+    <div class="listText" id="Fav">
+      Liked: &nbsp;{{ listTxt }}
+  </div>
+    <button (click)='refreshFav()'> refresh</button>
+  </div>
 </div>

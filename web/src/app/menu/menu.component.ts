@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { RestaurantMenu, Restaurant, MenuItem, MenuSection } from 'src/main';
 import { ApiService } from './../../services/api/api.service';
@@ -17,19 +17,17 @@ export class MenuComponent implements OnInit {
   public hasData = false;
   public searchTag = '';
   public menu: MenuSection[];
-  private data: UserDataService;
+  private food_name : string = '';
 
-  constructor(private router: Router ) { }
+
+  constructor(private router: Router, private data: UserDataService) { }
 
   ngOnInit() {
     this.url = this.router.url;
     this.restaurantName = decodeURIComponent(this.url.split('/')[2]);
     this.createMenu();
     this.hasData = this.menu.length > 0;
-
-    console.log('before');
-    this.data.currentUser.subscribe(user => this.userId = user._id);
-    console.log('after');
+    this.userId = this.data.getUserId();
   }
 
   public async createMenu() {
@@ -108,11 +106,11 @@ export class MenuComponent implements OnInit {
     this.createMenu();
   }
 
-  Favourite(item: MenuItem) {
-    if(this.userId == 'NA'){
+  async Favourite(item: MenuItem) {
+    if (this.userId == 'NA') {
+    } else {
+      this.food_name = item.Name;
+      await ApiService.putLikeFood(this.userId, this.food_name);
     }
-    else{
-    console.log(this.userId);
-    ApiService.likefood(this.userId, item.Name);}
   }
 }
