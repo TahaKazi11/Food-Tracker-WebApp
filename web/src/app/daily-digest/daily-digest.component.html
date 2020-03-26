@@ -1,66 +1,12 @@
 <app-title subtitle="Daily Digest"></app-title>
-<div class="row row-cols-1 row-cols-md-3">
-    <div class="col mb-4">
+  <div class="row mb-4">
+    <div *ngFor = "let history of historys">
       <div class="card h-100">
-        <img src="..." class="card-img-top" alt="Image Coming">
+        <img src="https://media.discordapp.net/attachments/666763770327990345/679081001019768849/Final_Logo.png?width=571&height=571" class="card-img-top" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Daily Digest</h5>
-          <p class="card-text">Summary with come here</p>
-        </div>
+        <h5 class="card-title">{{history.date.substr(0,4)}} / {{history.date.substr(4,2)}} / {{history.date.substr(6)}}</h5>
+        <p class="card-text">{{history.cost}}</p>
       </div>
-     </div>  
-    <div class="col mb-4">
-        <div class="card h-100">
-          <img src="..." class="card-img-top" alt="Image Coming">
-          <div class="card-body">
-            <h5 class="card-title">Daily Digest</h5>
-            <p class="card-text">Summary with come here</p>
-          </div>
-        </div>
-     </div>
-    <div class="col mb-4">
-        <div class="card h-100">
-          <img src="..." class="card-img-top" alt="Image Coming">
-          <div class="card-body">
-            <h5 class="card-title">Daily Digest</h5>
-            <p class="card-text">Summary with come here</p>
-          </div>
-        </div>
-      </div>
-    <div class="col mb-4">
-        <div class="card h-100">
-          <img src="..." class="card-img-top" alt="Image Coming">
-          <div class="card-body">
-            <h5 class="card-title">Daily Digest</h5>
-            <p class="card-text">Summary with come here</p>
-          </div>
-        </div>
-      </div>
-    <div class="col mb-4">
-        <div class="card h-100">
-          <img src="..." class="card-img-top" alt="Image Coming">
-          <div class="card-body">
-            <h5 class="card-title">Daily Digest</h5>
-            <p class="card-text">Summary with come here</p>
-          </div>
-        </div>
-      </div>
-    <div class="col mb-4">
-        <div class="card h-100">
-          <img src="..." class="card-img-top" alt="Image Coming">
-          <div class="card-body">
-            <h5 class="card-title">Daily Digest</h5>
-            <p class="card-text">Summary with come here</p>
-          </div>
-        </div>
-      </div> 
-    <div class="col mb-4">
-        <div class="card h-100">
-          <img src="..." class="card-img-top" alt="Image Coming">
-          <div class="card-body">
-            <h5 class="card-title">Daily Digest</h5>
-            <p class="card-text">Summary with come here</p>
-          </div>
-        </div>
-      </div>     
-  </div>
+    </div>  
+    </div>
+</div>

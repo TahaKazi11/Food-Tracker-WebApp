@@ -58,3 +58,8 @@ export interface User {
 export interface Deduction {
   'exceeded': boolean;
 }
+
+export interface History{
+  'cost':number;
+  'date':string;
+}
