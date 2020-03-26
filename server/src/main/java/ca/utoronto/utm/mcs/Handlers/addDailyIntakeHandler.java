@@ -40,13 +40,11 @@ public class addDailyIntakeHandler implements HttpHandler {
 
     public void handleGet(HttpExchange httpExchange) throws JSONException, IOException {
         Map<String, String> queryParams = Utils.queryToMap(httpExchange.getRequestURI().getQuery());
-        String restrauntName = queryParams.get("restaurant");
         String tag = queryParams.get("tag");
         String foodName = queryParams.get("name");
         String id = queryParams.get("id");
 
         Document doc  = new Document();
-        doc.put("restaurant", restrauntName);
         doc.put("tag", tag);
         doc.put("name", foodName);
 
