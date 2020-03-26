@@ -83,6 +83,10 @@ export class UserProfileComponent implements OnInit {
   }
 
   refreshFav() {
+    ApiService.getProfile(this._id)
+      .then((user) => {
+        this.data.changeUserAccount(user);
+      });
     this.ngOnInit();
     document.getElementById('Fav').innerHTML = 'Liked: ' + this.favList.toString();
   }
