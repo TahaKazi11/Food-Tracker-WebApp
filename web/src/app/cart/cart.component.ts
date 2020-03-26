@@ -76,7 +76,9 @@ export class CartComponent implements OnInit {
         if (data.exceeded.valueOf() === true) {
           this.exceeded = true;
         }
-
+        for (var i = 0; i < this.items.length; i++){
+          ApiService.addDailyIntake(String(this.items[i].Tag[0]),this.items[i].Name,this.accountId)
+        }
         ApiService.getProfile(this.accountId)
         .then((user) => {
           this.data.changeUserAccount(user);

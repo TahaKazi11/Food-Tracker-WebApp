@@ -8,6 +8,7 @@ import { ApiErrorEmptyResponse } from './errors/api.error.empty.response';
 import { ApiError } from './errors/api.error';
 import { Injectable } from '@angular/core';
 import { RestaurantList, RestaurantMenu, Restaurant, MenuItem, MenuSection, Deduction, User,History } from 'src/main';
+import { url } from 'inspector';
 
 
 const apiBase = () => {
@@ -36,6 +37,9 @@ const urls = {
       ,
       getIntake :(userAccountId:string
       ) => `${ apiBase() }/api/getDailyIntake?id=${userAccountId}`
+      ,
+      addIntake :(tag:string,name:string,userAccountId:string
+        ) => `${ apiBase() }/api/addDailyIntake?tag=${tag}&name=${name}&id=${userAccountId}`
     },
     restaurants   : {
       menu: (restaurantId: string,
@@ -109,6 +113,10 @@ export class ApiService {
 
     public static getDailyIntake(userAccountId: string):Promise<Object[]>{
       return this.requestingFromAPI<Object[]>(urls.user.getIntake(userAccountId));
+    }
+
+    public static addDailyIntake(tag:string,name:string,userAccountId: string){
+      return this.requestingFromAPI(urls.user.addIntake(tag,name,userAccountId));
     }
 
     private static async requestingFromApiWithRetries<T>(path: string, maxRetries = 0, numRetry = 0): Promise<T> {
