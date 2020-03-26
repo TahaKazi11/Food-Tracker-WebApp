@@ -7,7 +7,7 @@ import { ApiErrorEmptyContent } from './errors/api.error.empty.content';
 import { ApiErrorEmptyResponse } from './errors/api.error.empty.response';
 import { ApiError } from './errors/api.error';
 import { Injectable } from '@angular/core';
-import { RestaurantList, RestaurantMenu, Restaurant, MenuItem, MenuSection, Deduction, User } from 'src/main';
+import { RestaurantList, RestaurantMenu, Restaurant, MenuItem, MenuSection, Deduction, User,History } from 'src/main';
 
 
 const apiBase = () => {
@@ -33,6 +33,9 @@ const urls = {
       ,
       likefood: (userAccountId: string, food: string
       ) => `${ apiBase() }/api/Fav?_id=${ userAccountId }&fid=${food}`
+      ,
+      getIntake :(userAccountId:string
+      ) => `${ apiBase() }/api/getDailyIntake?id=${userAccountId}`
     },
     restaurants   : {
       menu: (restaurantId: string,
@@ -104,6 +107,9 @@ export class ApiService {
       return this.requestingFromAPI<User>(urls.user.likefood(userAccountId, food), 'POST');
     }
 
+    public static getDailyIntake(userAccountId: string):Promise<Object[]>{
+      return this.requestingFromAPI<Object[]>(urls.user.getIntake(userAccountId));
+    }
 
     private static async requestingFromApiWithRetries<T>(path: string, maxRetries = 0, numRetry = 0): Promise<T> {
       try {
