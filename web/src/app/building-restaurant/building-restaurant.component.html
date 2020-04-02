@@ -1,3 +1,6 @@
-<div class="card-group">
-    <app-restaurant-summary *ngFor="let restraunt of restaurants" [restaurant]="restraunt"></app-restaurant-summary>
+<div class="content">
+    <app-title subtitle="restraunts"></app-title>
+    <div class="card-group">
+        <app-restaurant-summary *ngFor="let restraunt of restaurants" [restaurant]="restraunt"></app-restaurant-summary>
+    </div>
 </div>

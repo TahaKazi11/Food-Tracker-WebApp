@@ -1,5 +1,5 @@
 import { AxiosService } from './axios.service';
-import { AxiosResponse} from 'axios';
+import Axios, { AxiosResponse, AxiosRequestConfig} from 'axios';
 import { ApiErrorBadRequest } from './errors/api.error.bad.request.error';
 import { ApiErrorForbidden } from './errors/api.error.forbidden';
 import { ApiErrorTechnical } from './errors/api.error.technical';
@@ -7,7 +7,7 @@ import { ApiErrorEmptyContent } from './errors/api.error.empty.content';
 import { ApiErrorEmptyResponse } from './errors/api.error.empty.response';
 import { ApiError } from './errors/api.error';
 import { Injectable } from '@angular/core';
-import { RestaurantList, RestaurantMenu, Restaurant, MenuItem, MenuSection, Deduction } from 'src/main';
+import { RestaurantList, RestaurantMenu, Restaurant, MenuItem, MenuSection, Deduction, User} from 'src/main';
 
 
 const apiBase = () => {
@@ -20,8 +20,25 @@ const urls = {
       ) => `${ apiBase() }/user/by-account-id/${ userAccountId }`,
       settings: (userAccountId: string,
       ) => `${ apiBase() }/user/by-account-id/${ userAccountId }`,
-      deductBudget: (
-      ) => `${ apiBase() }/subtractFromBudget`
+      deductBudget: (userAccountId: string, totalExpense: string
+      ) => `${ apiBase() }/subtractFromBudget?_id=${ userAccountId }&amount=${ totalExpense }`,
+      authenticate: (email: string, password: string
+      ) => `${ apiBase() }/api/login?email=${ email }&password=${ password }`,
+      setBudget: (userAccountId: string, budget: string
+      ) => `${ apiBase() }/setBudget?_id=${ userAccountId }&budget=${ budget }`,
+      getProfile: (userAccountId: string
+      ) => `${ apiBase() }/api/getProfile?_id=${ userAccountId }`,
+      register: (username: string, email: string, phone: string, gender: string, birth: string, password: string
+      ) => `${ apiBase() }/api/addUser?username=${ username }&email=${ email }&phone=${ phone }&gender=${ gender }&birth=${ birth }&password=${ password }`
+      ,
+      likefood: (userAccountId: string, food: string
+      ) => `${ apiBase() }/api/Fav?_id=${ userAccountId }&fid=${food}`
+      ,
+      getIntake :(userAccountId:string
+      ) => `${ apiBase() }/api/getDailyIntake?id=${userAccountId}`
+      ,
+      addIntake :(tag:string,name:string,userAccountId:string
+        ) => `${ apiBase() }/api/addDailyIntake?tag=${tag}&name=${name}&id=${userAccountId}`
     },
     restaurants   : {
       menu: (restaurantId: string,
@@ -32,7 +49,7 @@ const urls = {
         ) => `${ apiBase() }/full-info/by-restaurant-id?name=${ restaurantId }`,
       byAccount: (userAccountId: string
         ) => `${ apiBase() }/restaurants/by-account-id/${ userAccountId }`,
-      byBuilding:(buildingId:string
+      byBuilding:(buildingId: string
         ) => `${ apiBase() }/restaurants/by-building?name=${ buildingId }`,
       menuBySearch: (restrauntId: string, searchTerm: string
           ) => `${ apiBase() }/restaurants/menu/by-search?restrauntId=${ restrauntId }&searchTerm=${ searchTerm }`,
@@ -70,7 +87,35 @@ export class ApiService {
     }
 
     public static deductExpense(userAccountId: string, totalExpense: string): Promise<Deduction> {
-      return this.requestingFromApiWithRetries<Deduction>(urls.user.deductBudget(), 2); // TODO add try catch for bad gateway
+      return this.requestingFromAPI<Deduction>(urls.user.deductBudget(userAccountId, totalExpense), 'POST'); // TODO add try catch for bad gateway
+    }
+
+    public static authenticateLogin(email: string, password: string): Promise<User> {
+      return this.requestingFromAPI<User>(urls.user.authenticate(email, password));
+    }
+
+    public static editBudget(userAccountId: string, budget: string): Promise<any> {
+      return this.requestingFromAPI<any>(urls.user.setBudget(userAccountId, budget), 'POST');
+    }
+
+    public static getProfile(userAccountId: string): Promise<User> {
+      return this.requestingFromAPI<User>(urls.user.getProfile(userAccountId));
+    }
+
+    public static registerUser(username: string, email: string, phone: string, gender: string, birth: string, password: string): Promise<User> {
+      return this.requestingFromAPI<User>(urls.user.register(username, email, phone, gender, birth, password), 'POST');
+    }
+
+    public static putLikeFood(userAccountId: string, food: string): Promise<User> {
+      return this.requestingFromAPI<User>(urls.user.likefood(userAccountId, food), 'POST');
+    }
+
+    public static getDailyIntake(userAccountId: string):Promise<Object[]>{
+      return this.requestingFromAPI<Object[]>(urls.user.getIntake(userAccountId));
+    }
+
+    public static addDailyIntake(tag:string,name:string,userAccountId: string){
+      return this.requestingFromAPI(urls.user.addIntake(tag,name,userAccountId));
     }
 
     private static async requestingFromApiWithRetries<T>(path: string, maxRetries = 0, numRetry = 0): Promise<T> {
@@ -95,13 +140,20 @@ export class ApiService {
      * @param path full path for request.
      */
 
-    private static async requestingFromAPI<T>(path: string): Promise<T> {
+  private static async requestingFromAPI<T>(path: string, type = 'GET', config = null): Promise<T> {
         let response: AxiosResponse<any>;
         let responseData: T;
         let header: T;
 
         try {
-            response = await this.axiosService.get(path);
+          switch (type) {
+            case 'GET':
+              response = await this.axiosService.get(path);
+              break;
+            case 'POST':
+              response = await this.axiosService.post(path, config);
+              break;
+            }
           } catch (e) {
             response = e.response;
             header = response.headers;

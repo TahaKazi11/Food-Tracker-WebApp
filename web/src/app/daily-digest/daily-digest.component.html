@@ -1,66 +1,17 @@
-<p>daily-digest works!</p>
-<div class="row row-cols-1 row-cols-md-3">
-    <div class="col mb-4">
+<app-title subtitle="Daily Digest"></app-title>
+<div *ngIf="logged_in; else notLoggedIn">
+  <div class="row mb-4">
+    <div *ngFor = "let Item of history">
       <div class="card h-100">
-        <img src="..." class="card-img-top" alt="Image Coming">
+        <img src="https://media.discordapp.net/attachments/666763770327990345/679081001019768849/Final_Logo.png?width=571&height=571" class="card-img-top" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Daily Digest</h5>
-          <p class="card-text">Summary with come here</p>
+        <p class="card-text">{{Item.tag}}</p>
+        <p class="card-text">{{Item.name}}</p>
         </div>
       </div>
-     </div>  
-    <div class="col mb-4">
-        <div class="card h-100">
-          <img src="..." class="card-img-top" alt="Image Coming">
-          <div class="card-body">
-            <h5 class="card-title">Daily Digest</h5>
-            <p class="card-text">Summary with come here</p>
-          </div>
-        </div>
-     </div>
-    <div class="col mb-4">
-        <div class="card h-100">
-          <img src="..." class="card-img-top" alt="Image Coming">
-          <div class="card-body">
-            <h5 class="card-title">Daily Digest</h5>
-            <p class="card-text">Summary with come here</p>
-          </div>
-        </div>
-      </div>
-    <div class="col mb-4">
-        <div class="card h-100">
-          <img src="..." class="card-img-top" alt="Image Coming">
-          <div class="card-body">
-            <h5 class="card-title">Daily Digest</h5>
-            <p class="card-text">Summary with come here</p>
-          </div>
-        </div>
-      </div>
-    <div class="col mb-4">
-        <div class="card h-100">
-          <img src="..." class="card-img-top" alt="Image Coming">
-          <div class="card-body">
-            <h5 class="card-title">Daily Digest</h5>
-            <p class="card-text">Summary with come here</p>
-          </div>
-        </div>
-      </div>
-    <div class="col mb-4">
-        <div class="card h-100">
-          <img src="..." class="card-img-top" alt="Image Coming">
-          <div class="card-body">
-            <h5 class="card-title">Daily Digest</h5>
-            <p class="card-text">Summary with come here</p>
-          </div>
-        </div>
-      </div> 
-    <div class="col mb-4">
-        <div class="card h-100">
-          <img src="..." class="card-img-top" alt="Image Coming">
-          <div class="card-body">
-            <h5 class="card-title">Daily Digest</h5>
-            <p class="card-text">Summary with come here</p>
-          </div>
-        </div>
-      </div>     
+    </div>
   </div>
+</div>
+<ng-template #notLoggedIn>
+  Please Log in for this feature
+</ng-template>

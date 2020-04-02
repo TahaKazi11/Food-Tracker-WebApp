@@ -12,21 +12,47 @@
     </div>
 
     <div class="col-sm-12 col-md-6 ">
-      <h2 class="mb-5">Welcome back :)</h2>
-        <div class="form-group">
-          <label for="emailAddress"><i class="fa fa-fw fa-envelope"></i> Email address</label>
-          <input type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp">
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <h2 class="mb-5 text-primary">Welcome back :)</h2>
+      <div class="form-group">
+        <label for="emailAddress"><i class="fa fa-fw fa-envelope"></i> Email address</label>
+        <input [(ngModel)]="email" type="email" [ngClass]="{
+          'is-valid': email != '' && validateEmail(),
+          'is-invalid': email != '' && !validateEmail()}"
+          class="form-control" id="emailAddress" aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="passwordInput"><i class="fa fa-fw fa-key"></i> Password</label>
+        <input [(ngModel)]="password" type="password" [ngClass]="{
+          'is-valid': password != '' && validatePassword(),
+          'is-invalid': password != '' && !validatePassword()}"
+          class="form-control" id="passwordInput" aria-describedby="passwordHelp">
+        <small *ngIf="password != ''" id="passwordHelp" class="form-text text-muted">
+          Minimum eight characters, at least one letter, one number and one special character
+        </small>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Remember me</label>
+      </div>
+      <div class="row">
+        <div class="col-md-2 col-sm-3 mb-3">
+          <button (click)="authenticate()" type="submit" class="btn btn-primary" [disabled]="!validateEmail() || !validatePassword()">Login</button>
         </div>
-        <div class="form-group">
-          <label for="passwordInput"><i class="fa fa-fw fa-key"></i> Password</label>
-          <input type="password" class="form-control" id="passwordInput">
+        <div class="col-md-2 col-sm-3">
+          <button type="submit" class="btn btn-outline-secondary" routerLink="/Register">Register</button>
         </div>
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Remember me</label>
+      </div>
+      <div *ngIf="success && showAlert" class="mt-3">
+        <div class="alert alert-success" role="alert">
+          {{confMessage}}
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+      <div *ngIf="!success && showAlert" class="mt-3">
+        <div class="alert alert-danger" role="alert">
+          {{confMessage}}
+        </div>
+      </div>
     </div>
   </div>
 </div>

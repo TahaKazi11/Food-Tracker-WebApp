@@ -25,6 +25,8 @@ export interface MenuSection {
 }
 
 export interface MenuItem {
+  // tslint:disable-next-line:ban-types
+  'Tag': String[];
   'id': string; // uniquely identifies menu item
   'Name': string;
   'Calories': number;
@@ -49,9 +51,10 @@ export interface User {
   'phone': string;
   'private': string;
   'budget': string;
+  'fav': string[];
 }
 
+
 export interface Deduction {
-  '_id': string;
-  'totalExpense': string;
+  'exceeded': boolean;
 }

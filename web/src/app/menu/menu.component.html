@@ -10,6 +10,14 @@
     </div>
 </div>
 
+<div class="buttons">
+  <button (click)="onTagSearchVege()" class="C_button" type="button">Vege</button>
+  <button (click)="onTagSearchHalal()"class="C_button" type="button">Halal</button>
+  <button (click)="onTagSearchMeat()" class="C_button" type="button">Meat</button>
+  <button (click)="onTagSearchDrinks()" class="C_button" type="button">Drinks</button>
+  <button (click)="onTagSearchResume()"class="C_button" type="button">Resume</button>
+</div>
+
 <div class="menu">
     <div *ngFor = "let section of menu">
         <h1>{{section.tag}}</h1>
@@ -20,12 +28,15 @@
                     <div class="card-body">
                         <h4 class="card-title">{{item.Name}}</h4>
                         <p class="card-text">price: {{item.Price}}$ calories: {{item.Calories}}</p>
-                        <div class="btn btn-info btn-lg" (click)="onAddToCard(item.Name, item.Calories, item.Price)">
+                        <div class="btn btn-info btn-lg" (click)="onAddToCard(item.Name, item.Calories, item.Price)" (keyup.enter)="onAddToCard(item.Name, item.Calories, item.Price)">
                             <i class="fa fa-shopping-cart"></i>
                         </div>
+                      <button (click)="Favourite(item)" class="Like_button" type="button" >
+                        <img src="../../assets/img/heart-removebg-preview.png"/>
+                      </button>
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>
     </div>
 </div>
