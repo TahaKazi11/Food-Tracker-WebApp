@@ -111,6 +111,11 @@ export class MenuComponent implements OnInit {
     } else {
       this.food_name = item.Name;
       await ApiService.putLikeFood(this.userId, this.food_name);
+
+      ApiService.getProfile(this.userId)
+      .then((user) => {
+        this.data.changeUserAccount(user);
+      });
     }
   }
 }
