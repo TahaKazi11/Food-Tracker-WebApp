@@ -59,7 +59,7 @@ export class MenuComponent implements OnInit {
   }
 
   public onAddToCard(name: string, calories: string, price: string) {
-    // logic for adding to cart here
+    this.data.items.push({ id: '10', Name: name, Calories: +calories, Price: +price, amount: 1 , Tag: []});
     console.log(name, calories, price);
   }
 
