@@ -21,14 +21,12 @@ export class CartComponent implements OnInit {
   constructor(private data: UserDataService) { }
 
   ngOnInit() {
-    this.pushItemToCart({ id: '1', Name: 'Cheddar Bacon Uncle Burger Combo', Calories: 350, Price: 5.5, amount: 3 , Tag: ['Meat']});
-    this.pushItemToCart({ id: '2', Name: 'hamburger', Calories: 250, Price: 3.25, amount: 1 , Tag: ['Meat']});
-    this.pushItemToCart({ id: '3', Name: 'Pan-Fried Beef Rice', Calories: 400, Price: 13.99, amount: 2 , Tag: ['Meat']});
-    this.pushItemToCart({ id: '4', Name: 'Secret Chicken with Rice', Calories: 500, Price: 13.88, amount: 3 , Tag: ['Meat']});
-    this.calTotalExpense(this.items);
     this.showAlert = false;
     this.exceeded = false;
     this.data.currentUser.subscribe(user => this.accountId = user._id);
+    this.data.CurrentUserItem.subscribe(item => this.items = item);
+    this.calTotalExpense(this.items);
+
   }
 
   public pushItemToCart(data: MenuItem) {
