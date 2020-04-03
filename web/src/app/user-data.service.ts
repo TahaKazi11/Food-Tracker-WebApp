@@ -10,6 +10,8 @@ export class UserDataService {
   private userAccount = new BehaviorSubject(this.initData);
   currentUser = this.userAccount.asObservable();
 
+  public currentTagNumber = 0;
+
   items: Array<MenuItem> = [];
   private UserItem = new BehaviorSubject(this.items);
   CurrentUserItem = this.UserItem.asObservable();
